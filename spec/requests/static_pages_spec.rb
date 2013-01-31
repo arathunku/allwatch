@@ -8,21 +8,15 @@ describe "Static pages" do
   let(:base_title) { 'AllWatch' }
   describe "Home page" do
     before {visit root_path}
-    it "should have the title 'Strona Główna'" do
-      should have_selector('title', 'Strona Główna | #{:base_title}')
-    end
 
-    it "should not have a custom page title" do
-      should_not have_selector('title', text: '#{base_title}')
-    end
+    it { should have_selector('title', 'Strona Główna | #{:base_title}') }
+    it { should_not have_selector('title', text: '#{base_title}') }
   end
 
   describe "About page" do
     before {visit '/blog/about'}
-    it "should have the title 'Co to?'" do
-      visit '/blog/about'
-      should have_selector('title', 'Co to? | #{:base_title}')
-    end
+    
+    it { should have_selector('title', 'Co to? | #{:base_title}') }
   end
 
 end
