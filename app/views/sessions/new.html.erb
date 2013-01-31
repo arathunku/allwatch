@@ -1,0 +1,6 @@
+<h1>Logowanie</h1>
+<%= form_for(:session, url: sessions_path, html: {class: "navbar-form pull-right"}) do |f| %>
+  <%= f.text_field :email, placeholder: "Email", class: "span2" %>
+  <%= f.password_field :password, placeholder: "Hasło", class: "span2" %>
+  <%= f.submit "Zaloguj", class: "btn" %>
+<% end %>

@@ -6,13 +6,26 @@
         <li class="<%=is_active('home')%>"><%= link_to 'Główna', root_path %></li>
         <li class="<%=is_active('about')%>"><%= link_to 'Co to?', blog_about_path %></li>
       </ul>
-      <a href="<%= signup_path %>" class="btn pull-right btn-link">Rejestracja</a>
       <div class="break"></div>
-      <form class="navbar-form pull-right">
-        <input class="span2" type="text" placeholder="Email">
-        <input class="span2" type="password" placeholder="Password">
-        <button type="submit" class="btn">Zaloguj</button>
-      </form>
+      <% if signed_in? %>
+        <div class="btn-group pull-right">
+          <button class="btn"><%= current_user.email %></button>
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <!-- dropdown menu links -->
+            <%= link_to "Wyloguj", signout_path, method: "delete", class: "btn pull-right btn-link" %>
+          </ul>
+        </div>
+      <% else %>
+        <a href="<%= signup_path %>" class="btn pull-right btn-link">Rejestracja</a>
+        <%= form_for(:session, url: sessions_path, html: {class: "navbar-form pull-right"}) do |f| %>
+          <%= f.text_field :email, placeholder: "Email", class: "span2" %>
+          <%= f.password_field :password, placeholder: "Hasło", class: "span2" %>
+          <%= f.submit "Zaloguj", class: "btn" %>
+        <% end %>
+      <% end%>
     </div>
   </div>
 </div>
