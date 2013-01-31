@@ -1,14 +1,37 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="pl">
 <head>
-  <title>AllwatchSite</title>
+  <meta charset="UTF-8">
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container-fluid">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <%= link_to 'AllWatch', root_path, class: 'brand' %>
+        <ul class="nav">
+          <li class="<%=is_active('home')%>"><%= link_to 'Główna', root_path %></li>
+          <li class="<%=is_active('about')%>"><%= link_to 'Co to?', blog_about_path %></li>
+        </ul>
+        <form class="navbar-form pull-right">
+          <input class="span2" type="text" placeholder="Email">
+          <input class="span2" type="password" placeholder="Password">
+          <button type="submit" class="btn">Zaloguj</button>
+        </form>
+      </div>
+    </div>
+    <% unless flash[:warning].nil? %>
+    <div class="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:warning] %>
+    </div>
+    <% end %>
+    <div class="head-unit">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

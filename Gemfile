@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
-
+gem "bootstrap-sass", "~> 2.2.2.0"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -18,11 +18,20 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-gem "rspec-rails", "2.12.2"
+  gem "rspec-rails", "2.12.2"
+  gem "guard-rspec", "2.4.0"
+  gem 'wdm', '~> 0.0.3' 
+  gem 'guard-spork', '1.2.0'
+  gem 'spork', '0.9.2'
+  gem 'debugger'
 end
 
 group :test do
   gem "capybara", "2.0.2"
+  gem 'win32console', '1.3.0'
+  gem 'rb-fchange', '0.0.5'
+  gem 'rb-notifu', '0.0.4'
+
 end
 
 group :production do
