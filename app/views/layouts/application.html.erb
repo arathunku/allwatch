@@ -16,6 +16,8 @@
           <li class="<%=is_active('home')%>"><%= link_to 'Główna', root_path %></li>
           <li class="<%=is_active('about')%>"><%= link_to 'Co to?', blog_about_path %></li>
         </ul>
+        <a href="<%= signup_path %>" class="btn pull-right btn-link">Rejestracja</a>
+        <div class="break"></div>
         <form class="navbar-form pull-right">
           <input class="span2" type="text" placeholder="Email">
           <input class="span2" type="password" placeholder="Password">
@@ -29,7 +31,7 @@
       <%= flash[:warning] %>
     </div>
     <% end %>
-    <div class="head-unit">
+    <div class="center hero-unit">
       <%= yield %>
     </div>
   </div>

@@ -37,6 +37,9 @@ end
 group :production do
   gem "pg", "0.14.1"
 end
+group :development do
+  gem "annotate", "2.5.0"
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
