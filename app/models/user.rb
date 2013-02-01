@@ -34,8 +34,11 @@ class User < ActiveRecord::Base
       end
       self.password_confirmation = user[:password_confirmation_new]
       self.password = user[:password_new]
-      save
-      return true
+      if save
+        return true
+      else
+        return false
+      end
     else
       return false
     end

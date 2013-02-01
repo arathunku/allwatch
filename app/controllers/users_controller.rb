@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_filter :correct_user?, only: [:show, :edit, :update]
-
+  before_filter :ommit_if_logged, only: [:new]
   def show
-    debugger
     @user = User.find_by_id(params[:id])
     redirect_to root_path if @user.nil?
   end
@@ -19,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+      @user = User.new
   end
 
   def edit
@@ -41,6 +40,9 @@ class UsersController < ApplicationController
 
   private
     def correct_user?
-      redirect_to root_path unless signed_in?
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Zaloguj sie."
+      end
     end
 end
