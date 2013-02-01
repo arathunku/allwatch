@@ -1,0 +1,18 @@
+<h1>Edit</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(current_user) do |f| %>
+      
+      <%= f.label :password, "Poprzednie hasło" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_new %>
+      <%= f.password_field :password_new %>
+
+      <%= f.label :password_confirmation_new, "Potwierdzenie" %>
+      <%= f.password_field :password_confirmation_new %>
+
+      <%= f.submit "Zapisz zmiany", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

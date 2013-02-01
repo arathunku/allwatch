@@ -1,0 +1,12 @@
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 940px; /* or 940px */
+}
+
+a.normal_links {
+  color: #000;
+  &.hover {
+    color: #000;
+  }
+}
