@@ -1,0 +1,6 @@
+<%= form_for(:look_for, url: user_looks_path(@user, @new_look)) do |f| %>
+  <%= f.text_field :search_string, placeholder: "Szukam..", class: "span2" %>
+  <%= f.text_field :search_price_from, placeholder: "Cena od:", class: "span2" %>
+  <%= f.text_field :search_price_to, placeholder: "Cena do:", class: "span2" %>
+  <%= f.submit "Obserwuj", class: "btn btn-large btn-primary" %>
+<% end %>

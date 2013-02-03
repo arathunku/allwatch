@@ -9,7 +9,7 @@
       <div class="break"></div>
       <% if signed_in? %>
         <div class="btn-group pull-right">
-          <a href="<%= root_path %>" class="normal_links"><button class="btn"><%= current_user.email %></button></a>
+          <a href="<%= user_path(current_user) %>" class="normal_links"><button class="btn"><%= current_user.email %></button></a>
           <button class="btn dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
           </button>

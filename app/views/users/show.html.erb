@@ -1,1 +1,9 @@
-<h1><%= @user.email %></h1>
+<div class="span8">
+  <%= render 'shared/look_form' %>
+  <% if @user.looks.any? %>
+    <h3>Obserwuję: (<%= @user.looks.count %>)</h3>
+    <ol class="looks">
+      <%= render @looks %>
+    </ol>
+  <% end %>
+</div>

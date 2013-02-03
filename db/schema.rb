@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130131195839) do
+ActiveRecord::Schema.define(:version => 20130203180813) do
+
+  create_table "looks", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name_query"
+    t.text     "look_query", :limit => 255
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "looks", ["user_id", "name_query"], :name => "index_looks_on_user_id_and_name_query"
 
   create_table "users", :force => true do |t|
     t.string   "email"

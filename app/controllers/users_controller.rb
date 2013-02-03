@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
   before_filter :correct_user?, only: [:show, :edit, :update]
   before_filter :ommit_if_logged, only: [:new]
+
+
   def show
     @user = User.find_by_id(params[:id])
     redirect_to root_path if @user.nil?
+    @looks = @user.looks.all
+    @new_look = Look.new
   end
 
   def create

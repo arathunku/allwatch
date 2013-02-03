@@ -8,10 +8,13 @@
 #  updated_at :datetime         not null
 #
 
+
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   has_secure_password
-
+  has_many :looks, dependent: :destroy
+  
+  attr_accessor :search_string, :search_price_from, :search_price_to
   before_save { |user| user.email.downcase! }
   before_save :create_remember_token
 

@@ -1,0 +1,9 @@
+<li>
+  <span class="content"><%= link_to look.name_query,  user_look_path(current_user, look) %></span>
+  <span class="timestamp">
+     <%= time_ago_in_words(look.created_at) %> 
+  </span>
+  <%= link_to "delete", user_look_path(current_user, look), method: :delete,
+                                     data: { confirm: "Na pewno?" },
+                                     title: look.name_query %>
+</li>
