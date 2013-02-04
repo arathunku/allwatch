@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203180813) do
+ActiveRecord::Schema.define(:version => 20130204211225) do
+
+  create_table "auctions", :force => true do |t|
+    t.integer  "look_id"
+    t.string   "name"
+    t.decimal  "price_atm",  :precision => 10, :scale => 3
+    t.decimal  "price_buy",  :precision => 10, :scale => 3
+    t.datetime "end_time"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  add_index "auctions", ["look_id", "price_atm", "price_buy", "name", "end_time"], :name => "altered_auctions_index"
 
   create_table "looks", :force => true do |t|
     t.integer  "user_id"

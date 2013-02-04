@@ -1,6 +1,7 @@
 class Look < ActiveRecord::Base
   attr_accessible :look_query, :name_query
   belongs_to :user
+  has_many :auction, dependent: :destroy
   CORRECT_NAME = /^(?:[^\W_]|\s)*$/u
 
 

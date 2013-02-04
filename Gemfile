@@ -2,13 +2,16 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 gem "bootstrap-sass", "~> 2.2.2.0"
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem "bcrypt-ruby", "~> 3.0.1"
 gem 'faker', '1.0.1'
-
 gem 'jquery-rails'
 
+
+
+#ALLEGRO
+gem "savon", git: "git://github.com/savonrb/savon.git"
+gem "httpclient", "~> 2.3.2"
+#-------------------
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
