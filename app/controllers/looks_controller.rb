@@ -2,6 +2,7 @@ class LooksController < ApplicationController
   before_filter :correct_user?
   def show
     @looks = current_user.looks.find_by_id(params[:id])
+    @auctions = @looks.auction
   end
 
   def create

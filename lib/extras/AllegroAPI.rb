@@ -1,14 +1,11 @@
-#allegro = AllegroAPI.new(login: 'michafor', 
-                          #password: File.read('allegro_pass.txt'),
-                          #webapikey: File.read('allegro_webapikey.txt')
-                        #)
-
 class AllegroAPI
   require "savon"
   HTTPI.adapter = :httpclient
   attr_reader :client, :info
 
   def initialize(info)
+    info[:login_type] ||= 0
+    @login_type = info[:login_type]
     @info = AllegroInfo.new(info)
     @client = Savon.client(wsdl: "https://webapi.allegro.pl/uploader.php?wsdl", log: false)
     #Later check in docs if test version can update same as normal 
@@ -21,7 +18,7 @@ class AllegroAPI
   # => *refactor that the call is made in outside function and check exceptions(done?)
   def do_search(search_hash)
     raise ArgumentError, "Search-string not specified" if search_hash["search-string"].nil?
-    if search_hash["search-limit"] > 100 || search_hash["search-limit"] < 0
+    if (search_hash["search-limit"].nil?) || (search_hash["search-limit"] > 100) || (search_hash["search-limit"] < 0)
       search_hash["search-limit"] = 50
     end
     if limit?
@@ -97,22 +94,39 @@ class AllegroAPI
     @info.ver ||= update_version
     begin
       puts "Calling doLogin"
-      response = @client.call(:do_login, message: {"user-login" => @info.login,
-                                              "user-password" => @info.password,
-                                              "country-code" => @info.country,
-                                              "webapi-key" => @info.key,
-                                              "local-version" => @info.ver
-                                              })
+      if @login_type == 0
+        puts "Plain text login"
+        response = @client.call(:do_login, message: {"user-login" => @info.login,
+                                                "user-password" => @info.password,
+                                                "country-code" => @info.country,
+                                                "webapi-key" => @info.key,
+                                                "local-version" => @info.ver
+                                                })
+      else
+        puts "Login encoded"
+        response = @client.call(:do_login_enc, message: {"user-login" => @info.login,
+                                        "user-password" => @info.password,
+                                        "country-code" => @info.country,
+                                        "webapi-key" => @info.key,
+                                        "local-version" => @info.ver
+                                        })
+      end
+      response.body[:do_login_response][:session_handle_part]
     rescue Savon::SOAPFault => error
       fault_code = error.to_hash[:fault][:faultcode]
       if fault_code == "ERR_INVALID_VERSION_CAT_SELL_FIELDS"
         @info.ver = update_version
         retry
+      elsif fault_code == "ERR_CAPTCHA_REQUIRED"
+          puts error.to_hash[:fault].to_s
+          raise CustomError, "Fill Captcha"
+      elsif fault_code == "ERR_USER_PASSWD"
+          puts error.to_hash[:fault].to_s
+          raise CustomError, "Wrong Password"
       else 
         puts error.to_hash[:fault].to_s
       end
     end
-    response = response.body[:do_login_response][:session_handle_part]
   end
 end
 
@@ -125,24 +139,32 @@ class AllegroInfo
 
   def initialize(info)
     @login = info[:login]
-    #change later to get password from INITIALIZATION and USE get_password method
-    @password = info[:password]
-    #@password = get_password(File.read('allegro_pass.txt'))
+    if info[:login_type] == 0
+      @password = info[:password]
+    elsif info[:login_type] == 1
+      @password = get_password_senc(info[:password])
+    else
+      @password = get_password_nenc(info[:password])
+    end
     @key = info[:webapikey]
     info[:country].nil? ? @country = 1 : @country = info[:country]
     @ver = nil
   end
-
-  def get_password(pass)
-    Base64.encode64(Digest::SHA2.new.digest(pass))
+  #normal encdoing
+  def get_password_nenc(pass)
+    puts "normal"
+    Base64.encode64(Digest::SHA256.new.digest(pass))
+  end
+  #strict encoding
+  def get_password_senc(pass)
+    puts "strict"
+    Base64.strict_encode64(Digest::SHA256.new.digest(pass))
   end
 end
 
 class CustomError < StandardError
-  attr_accessor :object, :operation
-  def initialize(obj, oper)
-    @object, @operation = obj, oper
-    super("Error performing #{@operation} on --> #{@object}")
+  def initialize(oper="CustomError triggered")
+    super(oper)
   end
 end
 
