@@ -6,4 +6,13 @@ class Auction < ActiveRecord::Base
   validate :name, presence: true, length: { maximum: 255 }
   validate :end_time, presence: true, length: { maximum: 255 }
 
+  def link
+    "http://www.allegro.pl/i#{self.auction_id}.html"
+  end
+
+
+  def show?
+    Time.now > self.end_time ? "hide-auction" : "show-auction"
+  end
+
 end

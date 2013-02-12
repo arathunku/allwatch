@@ -1,0 +1,1 @@
+{:fault=>{:faultcode=>"Server", :faultstring=>nil, :faultactor=>"Invalid parameters has been passed to 'doSearch' operation - Value 1.0 in field search-order (int) is incorrect", :detail=>{:soap_val=>{:"@xsi:type"=>"xsd:string"}}}}

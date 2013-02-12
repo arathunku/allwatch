@@ -18,10 +18,18 @@ ul {
 .sidebar {
   min-height: 10em
 }
-.looks {}
+.looks {
+  margin: 0.4em 0.4em 0.4em 0em;
+}
 
 .looks li {
-  margin: 0.4em;
+  margin: 0.4em 0em 0.4em 0.4em;
+}
+
+.looks ul {
+  max-height: 20em;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .looks .look {
@@ -30,6 +38,7 @@ ul {
   &:hover{
     background-color: #DCDCDC;
   }
+  padding: 0.35em;
 }
 
 .looks .delete_button {
@@ -47,6 +56,20 @@ ul {
   padding-right: 0.5em;
 }
 
+.auction {
+  background-color: #E9E9E9;
+  padding: 0.1em 0.25em 0.1em 0.25em;
+  height: 3em;
+}
+
+.price {
+  width: 6em;
+}
+.price span{
+  display: block;
+  text-align: left;
+}
+
 .form-horizontal .control-label {
   float: left;
   width: 160px;
@@ -55,4 +78,7 @@ ul {
 }
 .form-horizontal .controls {
   margin-left: 180px;
+}
+.hide-auction {
+  display: none;
 }

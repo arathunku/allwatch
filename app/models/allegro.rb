@@ -14,7 +14,7 @@ class Allegro
       hash_to_ask = ActiveSupport::JSON.decode(l[:look_query]).symbolize_keys
       hash_to_ask = hash_to_ask.each_with_object({}) do |(k,v), h|
         if v.is_number?
-          h[k.to_s.split('_').join('-')] = v.to_f
+          v.to_i == v.to_f ? h[k.to_s.split('_').join('-')] = v.to_i : h[k.to_s.split('_').join('-')] = v.to_f
         else
           h[k.to_s.split('_').join('-')] = v 
         end
@@ -25,12 +25,16 @@ class Allegro
           name = item[:s_it_name]
           price_atm = item[:s_it_price] || 0
           price_buy = item[:s_it_buy_now_price] || 0
+          if price_atm == price_buy 
+            price_atm = 0
+          end
           end_time = Time.at(item[:s_it_ending_time].to_i).to_datetime
           auction_id = item[:s_it_id]
           r = l.auctions.where(auction_id: auction_id).first_or_initialize
           r.update_attributes(name: name, price_atm: price_atm, price_buy: price_buy, end_time: end_time)
         end
       end
+      l.touch
     end
   end
 end

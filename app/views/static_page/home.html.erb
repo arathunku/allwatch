@@ -1,9 +1,9 @@
 <% provide(:title, 'Strona Główna') %>
 <% if signed_in? %>
   <%= render 'shared/look_form' %>
-  <ol class="looks">
+  <ul class="looks">
     <%= render @looks %>
-  </ol>
+  </ul>
 <% else %>
   <div class="hero-unit">
     Powiadomienia o nowych aukcjach na allegro.

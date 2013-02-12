@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
   include UsersHelper
+  include AuctionsHelper
 
   def ommit_if_logged
     redirect_to root_path if signed_in?

@@ -2,7 +2,7 @@ class LooksController < ApplicationController
   before_filter :correct_user?
   def show
     @looks = current_user.looks.find_by_id(params[:id])
-    @auctions = @looks.auction
+    @auctions = @looks.auctions
   end
 
   def create
@@ -10,9 +10,7 @@ class LooksController < ApplicationController
       flash[:error] = "Cos poszlo nie tak"
       redirect_to root_path
     else
-      ActiveRecord::Base.include_root_in_json = false
-      @look = current_user.looks.new(name_query: params[:look_for][:search_string],
-                                     look_query: ActiveSupport::JSON.encode(params[:look_for]))
+      @look = Look.prepare(current_user, params)
       if @look.save
         flash[:notice] = "Dodalem"
         redirect_to root_path
