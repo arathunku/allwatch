@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204221829) do
+ActiveRecord::Schema.define(:version => 20130212015931) do
 
   create_table "auctions", :force => true do |t|
     t.integer  "look_id"
