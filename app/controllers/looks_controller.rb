@@ -11,7 +11,6 @@ class LooksController < ApplicationController
       redirect_to root_path
     else
       ActiveRecord::Base.include_root_in_json = false
-      #ActiveSupport::JSON.decode(j).symbolize_keys
       @look = current_user.looks.new(name_query: params[:look_for][:search_string],
                                      look_query: ActiveSupport::JSON.encode(params[:look_for]))
       if @look.save
