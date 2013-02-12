@@ -1,7 +1,9 @@
 AllwatchSite::Application.routes.draw do
   root to: 'static_page#home'
   resources :users, execept: [:show] do
-    resources :looks, only: [:show, :create, :destroy]
+    resources :looks, only: [:show, :create, :destroy] do
+      get 'refresh', on: :member
+    end
   end
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -10,5 +12,4 @@ AllwatchSite::Application.routes.draw do
   match '/signout',    to: "sessions#destroy", via: :delete
   match '/blog/about', to: "static_page#about"
   match '/users/:id/settings', to: "users#edit"
-
 end

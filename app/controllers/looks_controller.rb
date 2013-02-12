@@ -32,6 +32,11 @@ class LooksController < ApplicationController
     redirect_to root_path
   end
 
+  def refresh
+    Allegro.check_for_new_auctions(params[:id])
+    redirect_to root_path
+  end
+
   private
     def params_proper?(p)
       is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])

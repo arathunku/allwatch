@@ -1,6 +1,9 @@
 <li>
   <div class="look">
     <div class="delete_button">
+      <%= link_to refresh_user_look_path(current_user, look), title: "Odśwież" do %>
+        <i class="icon-refresh"></i> 
+      <% end %>
       <%= link_to user_look_path(current_user, look), title: "Opcje" do %>
        <i class="icon-edit"></i> 
       <% end %>

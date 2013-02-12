@@ -1,11 +1,16 @@
 class Allegro
   require 'date'
-  def self.check_for_new_auctions
+  def self.check_for_new_auctions(id=nil)
     allegro = AllegroAPI.new(login: ENV['ALLEGRO_LOGIN'], 
                       password: ENV['ALLEGRO_PASSWORD'],
                       webapikey: ENV['ALLEGRO_WEBAPIKEY']
                     )
-    looks = Look.all
+    if id.nil?
+      looks = Look.all
+    else
+      looks = [Look.find_by_id(id)]
+    end
+    debugger
     looks.each do |l|
       hash_to_ask = ActiveSupport::JSON.decode(l[:look_query]).symbolize_keys
       hash_to_ask = hash_to_ask.each_with_object({}) do |(k,v), h|
