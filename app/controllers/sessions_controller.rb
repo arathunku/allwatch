@@ -1,3 +1,4 @@
+#encoding: utf-8 
 class SessionsController < ApplicationController
   before_filter :ommit_if_logged, only: [:new, :create]
   
@@ -9,10 +10,10 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      redirect_back_or user
+      redirect_back_or root_url
     else
-      flash.now[:error] = 'Invalid email/password combination' # Not quite right!
-      render 'new'
+      flash[:error] = 'Złe hasło/email'
+      redirect_to root_url
     end
   end
 

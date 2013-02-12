@@ -1,2 +1,11 @@
 <% provide(:title, 'Strona Główna') %>
-<h1>AllWatch</h1>
+<% if signed_in? %>
+  <%= render 'shared/look_form' %>
+  <ol class="looks">
+    <%= render @looks %>
+  </ol>
+<% else %>
+  <div class="hero-unit">
+    Powiadomienia o nowych aukcjach na allegro.
+  </div>
+<% end %> 

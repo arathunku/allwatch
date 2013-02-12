@@ -30,7 +30,7 @@ describe "User Pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+    before { visit root_path }
 
     it { should have_selector("h1", user.email)}
   end

@@ -1,21 +1,14 @@
 class UsersController < ApplicationController
-  before_filter :correct_user?, only: [:show, :edit, :update]
+  before_filter :correct_user?, only: [:edit, :update]
   before_filter :ommit_if_logged, only: [:new]
 
-
-  def show
-    @user = User.find_by_id(params[:id])
-    redirect_to root_path if @user.nil?
-    @looks = @user.looks.all
-    @new_look = Look.new
-  end
 
   def create
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
       flash[:success] = "Welcome!"
-      redirect_to @user
+      redirect_to root_path
     else
       render 'new'
     end
@@ -34,19 +27,12 @@ class UsersController < ApplicationController
       flash[:notice] = "Password has been changed"
       @user = User.find_by_id(params[:id])
       sign_in @user
-      redirect_to edit_user_path(@user)
+      redirect_to root_path
     else
-      redirect_to edit_user_path(@user)
+      redirect_to root_path
       flash[:warning] = "Wrong password"
     end
   end
 
 
-  private
-    def correct_user?
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Zaloguj sie."
-      end
-    end
 end

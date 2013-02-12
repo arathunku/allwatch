@@ -1,7 +1,7 @@
 AllwatchSite::Application.routes.draw do
   root to: 'static_page#home'
-  resources :users do
-    resources :looks, only: [:create, :show, :destroy]
+  resources :users, execept: [:show] do
+    resources :looks, only: [:show, :create, :destroy]
   end
   resources :sessions, only: [:new, :create, :destroy]
 

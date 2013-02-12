@@ -1,18 +1,27 @@
 <%= provide(:title, "Rejestracja")  %>
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_message' %>
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.submit "Utwórz konto", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
-</div>
+<%= form_for @user, html: {class: "form-horizontal"} do |f| %>
+  <%= render 'shared/error_message' %>
+    <div class="control-group">
+      <%= f.label :email, for: "inputEmail", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :email, id: "inputEmail" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password, "Hasło", for: "inputPassword", class: "control-label" %>
+      <div class="controls">
+        <%= f.password_field :password, id: "inputPassword" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password_confirmation, "Potwierdzenie hasła", for: "inputConfirmation", class: "control-label" %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation, id: "inputConfirmation" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Utwórz konto", class: "btn btn-large" %>
+      </div>
+    </div>
+<% end %>

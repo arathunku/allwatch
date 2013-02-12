@@ -4,9 +4,55 @@
   max-width: 940px; /* or 940px */
 }
 
-a.normal_links {
+a {
   color: #000;
   &.hover {
     color: #000;
   }
+}
+
+ul {
+  list-style-type: none;
+}
+
+.sidebar {
+  min-height: 10em
+}
+.looks {}
+
+.looks li {
+  margin: 0.4em;
+}
+
+.looks .look {
+  background-color: #E9E9E9;
+  font-size: 1.25em;
+  &:hover{
+    background-color: #DCDCDC;
+  }
+}
+
+.looks .delete_button {
+  float: right;
+}
+
+.looks .name {
+  padding: 0.3em 0em 0em 0em;
+}
+
+.looks .time {
+  font-size: 0.65em;
+  text-align: right;
+  padding-bottom: 0.15em;
+  padding-right: 0.5em;
+}
+
+.form-horizontal .control-label {
+  float: left;
+  width: 160px;
+  padding-top: 5px;
+  text-align: right;
+}
+.form-horizontal .controls {
+  margin-left: 180px;
 }

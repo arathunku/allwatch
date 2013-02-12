@@ -8,7 +8,7 @@ class LooksController < ApplicationController
   def create
     unless params_proper?(params[:look_for])
       flash[:error] = "Cos poszlo nie tak"
-      redirect_to user_path(current_user)
+      redirect_to root_path
     else
       ActiveRecord::Base.include_root_in_json = false
       #ActiveSupport::JSON.decode(j).symbolize_keys
@@ -16,10 +16,10 @@ class LooksController < ApplicationController
                                      look_query: ActiveSupport::JSON.encode(params[:look_for]))
       if @look.save
         flash[:notice] = "Dodalem"
-        redirect_to user_path(current_user)
+        redirect_to root_path
       else
         flash[:error] = "Cos poszlo nie tak"
-        redirect_to user_path(current_user)
+        redirect_to root_path
       end
     end
   end
@@ -29,7 +29,7 @@ class LooksController < ApplicationController
     unless @look.destroy
       flash[:notice] = "Cos poszlo nie tak i nie dalo sie usunac"
     end
-    redirect_to user_path(current_user)
+    redirect_to root_path
   end
 
   private
@@ -38,11 +38,5 @@ class LooksController < ApplicationController
     end
     def is_numeric?(i)
       i.to_i.to_s == i || i.to_f.to_s == i
-    end
-    def correct_user?
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Zaloguj sie."
-      end
     end
 end

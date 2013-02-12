@@ -1,9 +1,26 @@
 <li>
-  <span class="content"><%= link_to look.name_query,  user_look_path(current_user, look) %></span>
-  <span class="timestamp">
-     <%= time_ago_in_words(look.created_at) %> 
-  </span>
-  <%= link_to "delete", user_look_path(current_user, look), method: :delete,
-                                     data: { confirm: "Na pewno?" },
-                                     title: look.name_query %>
+  <div class="look">
+    <div class="delete_button">
+      <%= link_to user_look_path(current_user, look), title: "Opcje" do %>
+       <i class="icon-edit"></i> 
+      <% end %>
+      <%= link_to user_look_path(current_user, look), method: :delete,
+                                         data: { confirm: "Na pewno nie chcesz tego obserwować?" }, title: "Usuń" do %>
+       <i class="icon-trash"></i> 
+      <% end %>
+    </div>
+    <div class="name">
+      <span class="content"><%= link_to look.name_query,  user_look_path(current_user, look) %></span>
+    </div>
+    <div class="time">
+      <span class="timestamp">
+         Dodano: <%= time_ago_in_words(look.created_at) %> 
+      </span>
+    </div>
+  </div>
+  <ul>
+    <% look.auctions.each do |auction|%>
+      <li><%= auction.name %></li>
+    <% end %>
+  </ul>
 </li>
