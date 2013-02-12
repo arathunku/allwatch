@@ -10,7 +10,6 @@ class Allegro
     else
       looks = [Look.find_by_id(id)]
     end
-    debugger
     looks.each do |l|
       hash_to_ask = ActiveSupport::JSON.decode(l[:look_query]).symbolize_keys
       hash_to_ask = hash_to_ask.each_with_object({}) do |(k,v), h|
@@ -28,7 +27,7 @@ class Allegro
           price_buy = item[:s_it_buy_now_price] || 0
           end_time = Time.at(item[:s_it_ending_time].to_i).to_datetime
           auction_id = item[:s_it_id]
-          r = l.auction.where(auction_id: auction_id).first_or_initialize
+          r = l.auctions.where(auction_id: auction_id).first_or_initialize
           r.update_attributes(name: name, price_atm: price_atm, price_buy: price_buy, end_time: end_time)
         end
       end
