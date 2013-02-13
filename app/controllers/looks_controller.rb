@@ -1,3 +1,4 @@
+#encoding: utf-8 
 class LooksController < ApplicationController
   before_filter :correct_user?
   def show
