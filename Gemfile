@@ -5,11 +5,11 @@ gem "bootstrap-sass", "~> 2.2.2.0"
 gem "bcrypt-ruby", "~> 3.0.1"
 gem 'faker', '1.0.1'
 gem 'jquery-rails'
-
+gem "mail", "~> 2.4.3"
 
 
 #ALLEGRO
-gem "savon", git: "git://github.com/savonrb/savon.git"
+gem "savon", "~> 2.1.0"
 gem "httpclient", "~> 2.3.2"
 #-------------------
 

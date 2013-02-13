@@ -1,3 +1,4 @@
+#encoding: utf-8 
 class UsersController < ApplicationController
   before_filter :correct_user?, only: [:edit, :update]
   before_filter :ommit_if_logged, only: [:new]
@@ -8,9 +9,15 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = "Welcome!"
+      begin
+        Notifier.welcome_email(@user.email).deliver
+      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+        flash[:success] = "Konto utworzone, niestety problemy z wysłaniem email"
+      end
       redirect_to root_path
     else
-      render 'new'
+      flash[:error] = "Wystąpił nieznany błąd."
+      redirect_to root_path
     end
   end
 
@@ -34,5 +41,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "Konto zostało usunięte"
+    redirect_to root_path
+  end
 
 end

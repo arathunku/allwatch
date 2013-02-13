@@ -12,4 +12,9 @@
 
       <%= f.submit "Zapisz zmiany", class: "btn btn-large" %>
     <% end %>
+    <%= link_to user_path(current_user), method: :delete,
+                                                    data: { confirm: "Nieodwracalna akcja!" }, 
+                                                    title: "Usuń konto" do %>
+      <i class="icon-trash"></i>  Usuń konto
+    <% end %>
   </div>
