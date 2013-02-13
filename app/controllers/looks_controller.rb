@@ -31,6 +31,7 @@ class LooksController < ApplicationController
 
   def refresh
     Allegro.check_for_new_auctions(params[:id])
+    flash[:success] = "Za chwilę spis nowych aukcji będzie na adresie podanym przy rejestracji."
     redirect_to root_path
   end
 
