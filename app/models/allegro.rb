@@ -26,7 +26,7 @@ class Allegro
           name = item[:s_it_name]
           price_atm = item[:s_it_price] || 0
           price_buy = item[:s_it_buy_now_price] || 0
-          end_time = Time.at(item[:s_it_ending_time].to_i).to_datetime
+          end_time = Time.at(item[:s_it_ending_time].to_i).utc
           auction_id = item[:s_it_id]
           r = l.auctions.where(auction_id: auction_id).first_or_initialize
           r.update_attributes(name: name, price_atm: price_atm, price_buy: price_buy, end_time: end_time)
@@ -41,7 +41,7 @@ class Allegro
   def self.send_notification_about_auctions(id=nil)
     # Auction.where('auctions.updated_at == auctions.created_at')
     Look.find_each do |l|
-      body = l.auctions.where("auctions.updated_at = auctions.created_at AND auctions.end_time > #{Time.now.to_i}")
+      body = l.auctions.where("auctions.updated_at = auctions.created_at AND auctions.end_time > #{Time.now.utc.to_i}")
       if body.length != 0 
         to = User.find_by_id(l.user_id).email
         Notifier.notification(to, l, body).deliver
