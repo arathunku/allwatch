@@ -6,7 +6,7 @@
   </tr>
   <% @auctions.each do |auction|%>
     <tr>
-      <td><a href="#" target="_blank"><%= auction.name %></a></td>
+      <td><a href="http://www.allegro.pl/i<%= auction.auction_id %>.html" target="_blank"><%= auction.name %></a></td>
       <td><%= auction.price_buy %></td>
       <td><%= auction.price_atm %></td>
     </tr>

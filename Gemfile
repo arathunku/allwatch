@@ -20,13 +20,14 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem "rspec-rails", "2.12.2"
   gem "guard-rspec", "2.4.0"
   gem 'wdm', '~> 0.0.3' 
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
   gem 'debugger'
+  gem "pg", "0.14.1"
 end
 
 group :test do
