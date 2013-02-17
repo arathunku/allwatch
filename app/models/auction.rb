@@ -5,7 +5,7 @@ class Auction < ActiveRecord::Base
   validate :look_id, presence: true
   validate :name, presence: true, length: { maximum: 255 }
   validate :end_time, presence: true, length: { maximum: 255 }
-  default_scope order: "price_atm asc, price_buy asc"
+  default_scope order: "price_buy asc, price_atm asc"
   def link
     "http://www.allegro.pl/i#{self.auction_id}.html"
   end

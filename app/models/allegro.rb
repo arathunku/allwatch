@@ -26,6 +26,7 @@ class Allegro
           name = item[:s_it_name]
           price_atm = item[:s_it_price] || 0
           price_buy = item[:s_it_buy_now_price] || 0
+          price_atm = 0 if price_buy == price_atm
           end_time = Time.at(item[:s_it_ending_time].to_i).utc
           auction_id = item[:s_it_id]
           r = l.auctions.where(auction_id: auction_id).first_or_initialize

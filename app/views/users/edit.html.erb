@@ -1,16 +1,29 @@
   <div>
-    <%= form_for(current_user) do |f| %>
-      
-      <%= f.label :password, "Poprzednie hasło" %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_new, "Nowe hasło" %>
-      <%= f.password_field :password_new %>
-
-      <%= f.label :password_confirmation_new, "Powtórz nowe hasło" %>
-      <%= f.password_field :password_confirmation_new %>
-
-      <%= f.submit "Zapisz zmiany", class: "btn btn-large" %>
+    <h2><%= current_user.email %></h2>
+    <%= form_for(current_user, html: {class: "form-horizontal"}) do |f| %>
+      <div class="control-group">
+        <%= f.label :password_new, "Nowe hasło" , for: "inputNewPassword", class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password_new, id: "inputNewPassword" %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password_confirmation_new, "Powtórz nowe hasło", for: "inputConfirmation", class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password_confirmation_new, id: "inputConfirmation" %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password, "Poprzednie hasło" , for: "inputPassword", class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password, id: "inputPassword" %>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Zapisz zmiany", class: "btn btn-large" %>
+        </div>
+      </div>
     <% end %>
     <%= link_to user_path(current_user), method: :delete,
                                                     data: { confirm: "Nieodwracalna akcja!" }, 

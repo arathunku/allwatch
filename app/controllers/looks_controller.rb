@@ -8,14 +8,17 @@ class LooksController < ApplicationController
 
   def create
     unless params_proper?(params[:look_for])
-      flash[:error] = "Cos poszlo nie tak"
+      flash[:error] = "Ceny muszą być liczbami nieujmnymi"
       redirect_to root_path
     else
       @look = Look.prepare(current_user, params)
       if @look.save
         flash[:notice] = "Dodalem"
+        debugger
+        Allegro.check_for_new_auctions(@look.id)
         redirect_to root_path
       else
+        debugger
         flash[:error] = "Cos poszlo nie tak"
         redirect_to root_path
       end
@@ -38,7 +41,11 @@ class LooksController < ApplicationController
 
   private
     def params_proper?(p)
-      is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])
+      if is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])
+        p[:search_price_from].to_f < p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
+      else
+        nil
+      end
     end
     def is_numeric?(i)
       i.to_i.to_s == i || i.to_f.to_s == i
