@@ -13,13 +13,11 @@ class LooksController < ApplicationController
     else
       @look = Look.prepare(current_user, params)
       if @look.save
-        flash[:notice] = "Dodalem"
-        debugger
+        flash[:success] = "Aukcja dodana, za chwilę powinien przyjść e-mail."
         Allegro.check_for_new_auctions(@look.id)
         redirect_to root_path
       else
-        debugger
-        flash[:error] = "Cos poszlo nie tak"
+        flash[:error] = "Coś poszło nie tak. Spróbuj ponownie lub skontaktuj się z administratorem."
         redirect_to root_path
       end
     end
@@ -28,7 +26,7 @@ class LooksController < ApplicationController
   def destroy
     @look = current_user.looks.find_by_id(params[:id])
     unless @look.destroy
-      flash[:notice] = "Cos poszlo nie tak i nie dalo sie usunac"
+      flash[:error] = "Coś poszło nie tak i niestety nie udało się usunąć."
     end
     redirect_to root_path
   end
@@ -37,6 +35,10 @@ class LooksController < ApplicationController
     Allegro.check_for_new_auctions(params[:id])
     flash[:success] = "Za chwilę spis nowych aukcji będzie na adresie podanym przy rejestracji."
     redirect_to root_path
+  end
+
+  def delete
+    @look = Look.find_by_id(params[:id])
   end
 
   private

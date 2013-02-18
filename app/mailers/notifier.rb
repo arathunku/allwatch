@@ -21,12 +21,15 @@ class Notifier < ActionMailer::Base
     end
   end
 
-  def notification(to, look, body)
+  def notification(user, look, body)
     headers['X-MC-Autotext'] = 'true'
     headers['X-MC-Tags'] = 'notification'
     @auctions = body
-    mail(to: to, subject: "\"#{look.name_query}\" -- nowe aukcje") do |format|
+    @look = look
+    @user = user
+    mail(to: user.email, subject: "\"#{look.name_query}\" -- nowe aukcje") do |format|
       format.html
+      format.text
     end
   end
 end

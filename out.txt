@@ -1,1 +1,1 @@
-{:fault=>{:faultcode=>"Server", :faultstring=>nil, :faultactor=>"Invalid parameters has been passed to 'doSearch' operation - Value 1.0 in field search-order (int) is incorrect", :detail=>{:soap_val=>{:"@xsi:type"=>"xsd:string"}}}}
+{"search_string":"pieni\u0105dze","search_price_from":"100","search_price_to":"200","search_order":"1","search_order_type":"0"}

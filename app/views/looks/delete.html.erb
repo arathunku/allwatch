@@ -1,0 +1,6 @@
+Czy na pewno chcesz przestać obserwować '<%= @look.name_query %>'?
+<%= link_to user_look_path(current_user, @look), method: :delete,
+                                    title: "Tak" do %>
+  <i class="icon-trash"></i> Tak
+<% end %>
+<%= link_to "Nie", root_url %>

@@ -41,11 +41,16 @@ class Allegro
   #temporary later move it to the checking for auctions and simplify 
   def self.send_notification_about_auctions(id=nil)
     # Auction.where('auctions.updated_at == auctions.created_at')
-    Look.find_each do |l|
+    if id.nil?
+      looks = Look.all
+    else
+      looks = [Look.find_by_id(id)]
+    end
+    looks.each do |l|
       body = l.auctions.where("auctions.updated_at = auctions.created_at AND auctions.end_time > '#{Time.now.strftime('%Y-%m-%d %H:%M:%S.000000')}'")
       if body.length != 0 
-        to = User.find_by_id(l.user_id).email
-        Notifier.notification(to, l, body).deliver
+        user = User.find_by_id(l.user_id)
+        Notifier.notification(user, l, body).deliver
         body.each { |b| b.touch }
       end
       puts "Ogarnieto #{l.name_query} -- #{body.length}"

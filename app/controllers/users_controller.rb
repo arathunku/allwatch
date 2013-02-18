@@ -8,15 +8,14 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Hej! Dodaj coś do obserwowania, a po chwili dostaniesz email z aukcjami!"
+      flash[:success] = "Hej! Zacznij coś obserwować, a po chwili dostaniesz email z aukcjami!"
       begin
         Notifier.welcome_email(@user.email).deliver
       rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-        flash[:success] = "Konto utworzone, niestety były problemy z wysłaniem email"
+        flash[:success] = "Konto zostało utworzone, niestety były problemy z wysłaniem email."
       end
       redirect_to root_path
     else 
-      debugger
       flash[:error] = @user.errors.full_messages
       redirect_to signup_path
     end
@@ -32,19 +31,19 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_id(params[:id])
     if @user.change_password?(params[:user])
-      flash[:notice] = "Hasło zmienione"
+      flash[:success] = "Hasło zostało zmienione."
       @user = User.find_by_id(params[:id])
       sign_in @user
       redirect_to root_path
     else
       redirect_to root_path
-      flash[:warning] = "Złe hasło obecne"
+      flash[:warning] = "Niepoprawne obecne hasło."
     end
   end
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "Konto zostało usunięte"
+    flash[:success] = "Konto zostało usunięte."
     redirect_to root_path
   end
 

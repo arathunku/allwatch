@@ -22,7 +22,8 @@
         <a href="<%= auction.link %>" target="_blank"><%= auction.name %></a>
         <div class="price pull-right">
           <span><%= auction.price_atm == 0 || auction.price_atm == auction.price_buy ? "-----" : "L: #{auction.price_atm} zł" %></span>
-          <span><%= auction.price_buy == 0 ? "-----" : "K: #{auction.price_buy} zł" %></span>
+          <div class="input-prepend input-append">
+            <span><%= auction.price_buy == 0 ? "-----" : "K: #{auction.price_buy} zł" %></span>
         </div>
       </li>
     <% end %>

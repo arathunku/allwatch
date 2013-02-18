@@ -1,0 +1,33 @@
+<table class="table table-hover">
+  <tr>
+    <td>id</td>
+    <td>email</td>
+    <td>aukcji</td>
+    <td></td>
+  </tr>
+  <tr class="<%= "error" if @user.looks.length > 5 %>">
+    <td><%= @user.id %></td>
+    <td><%= link_to @user.email, admin_path(@user) %></td>
+    <td><%= @user.looks.length %></td>
+    <td>
+        <%= link_to admin_path(@user), method: :delete,
+                                           data: { confirm: "Czy na pewno usunąć tego użytkownika?" }, title: "Usuń" do %>
+         <i class="icon-trash"></i> 
+        <% end %>
+    </td>
+  </tr>
+</table>
+<table class="table table-hover">
+  <tr>
+    <td>id</td>
+    <td>nazwa</td>
+    <td>aukcji</td>
+  </tr>
+  <% @looks.each do |look| %>
+  <tr>
+    <td><%= look.id %></td>
+    <td><%= look.name_query %></td>
+    <td><%= look.auctions.length %></td>
+  </tr>
+  <% end %>
+</table>

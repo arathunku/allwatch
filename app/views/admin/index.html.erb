@@ -1,0 +1,21 @@
+<table class="table table-hover">
+  <tr>
+    <td>id</td>
+    <td>email</td>
+    <td>aukcji</td>
+    <td></td>
+  </tr>
+  <% @users.each do |user| %>
+  <tr class="<%= "error" if user.looks.length > 5 %>">
+    <td><%= user.id %></td>
+    <td><%= link_to user.email, admin_path(user) %></td>
+    <td><%= user.looks.length %></td>
+    <td>
+        <%= link_to admin_path(user), method: :delete,
+                                           data: { confirm: "Czy na pewno usunąć tego użytkownika?" }, title: "Usuń" do %>
+         <i class="icon-trash"></i> 
+        <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
