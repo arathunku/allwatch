@@ -9,6 +9,7 @@ $(document).ready(function() {
     });
 
     $('.new-look').bind('ajax:beforeSend', function(evt, xhr, settings){
-      $(".sidebar").empty().html('<div class="spinner-big"><%= image_tag("spinner_big.gif") %><span class="spinner-big-text">Dodawanie i pobieranie aukcji..</span></div>');
+      $('.submit-look').parent('div').append('<button type="button" class="btn disabled" disabled="disabled">Ładowanie...</button>');
+      $('.submit-look').remove();
     });
 });
