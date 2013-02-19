@@ -1,30 +1,36 @@
-<li>
-  <div class="look">
-    <div class="delete_button">
-      <%= link_to refresh_user_look_path(current_user, look), remote: true, title: "Odśwież" do %>
-        <i class="icon-refresh"></i> 
-      <% end %>
-      <%= link_to user_look_path(current_user, look), title: "Opcje" do %>
-       <i class="icon-edit"></i> 
-      <% end %>
-      <%= link_to user_look_path(current_user, look), method: :delete,
-                                         data: { confirm: "Na pewno nie chcesz tego obserwować?" }, title: "Usuń" do %>
-       <i class="icon-trash"></i> 
-      <% end %>
+<ul class="looks">
+  <% @looks.each do |look| %>
+  <li>
+    <div class="look">
+      <div class="buttons">
+        <%= link_to refresh_user_look_path(current_user, look), remote: true, title: "Odśwież" do %>
+          <i class="icon-refresh"></i> 
+        <% end %>
+        <%= link_to user_look_path(current_user, look), title: "Opcje" do %>
+         <i class="icon-edit"></i> 
+        <% end %>
+        <%= link_to user_look_path(current_user, look), method: :delete,
+                                           data: { confirm: "Na pewno nie chcesz tego obserwować?" }, title: "Usuń" do %>
+         <i class="icon-trash"></i> 
+        <% end %>
+      </div>
+      <div class="name">
+        <span class="content"><%= link_to look.name_query,  user_look_path(current_user, look) %></span>
+      </div>
     </div>
-    <div class="name">
-      <span class="content"><%= link_to look.name_query,  user_look_path(current_user, look) %></span>
-    </div>
-  </div>
-  <ul>
-    <% look.auctions.each do |auction|%>
-      <li class="auction <%= auction.show? %>" id="<%= auction.auction_id %>">
-        <a href="<%= auction.link %>" target="_blank"><%= auction.name %></a>
-        <div class="price pull-right">
-          <span><%= auction.price_atm == 0 || auction.price_atm == auction.price_buy ? "-----" : "L: #{auction.price_atm} zł" %></span>
-          <span><%= auction.price_buy == 0 ? "-----" : "K: #{auction.price_buy} zł" %></span>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-</li>
+    <ul>
+      <% look.auctions.each do |auction|%>
+        <li class="auction <%= auction.show? %>" id="<%= auction.auction_id %>">
+          <div class="auction-title">
+            <a href="<%= auction.link %>" target="_blank"><%= auction.name %></a>
+          </div>
+          <div class="auction-price pull-right">
+            <span><%= auction.price_atm == 0 || auction.price_atm == auction.price_buy ? "-----" : "L: #{auction.price_atm} zł" %></span>
+            <span><%= auction.price_buy == 0 ? "-----" : "K: #{auction.price_buy} zł" %></span>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>

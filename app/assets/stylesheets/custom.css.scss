@@ -17,17 +17,35 @@ ul {
 
 .navbar-inner {
   background-color: #FF6701;
+  max-width: 940px;
+  margin: auto;
 }
 
 .sidebar {
-  min-height: 10em
-}
+     position:fixed;
+     top:60px;
+     width:21.97%;
+     height: 100%;
+ }
+
+ @media (max-width: 767px) {
+     .sidebar {
+         width:auto;
+     }
+ }
+
+ @media (max-width: 979px) {
+     .sidebar {
+        position:static;
+        width: auto;
+     }
+ }
+ .sidebar iframe {
+  border: 1px solid #dddddd;
+ }
+
 .looks {
   margin: 0.4em 0.4em 0.4em 0em;
-}
-
-.looks li {
-  margin: 0.4em 0em 0.4em 0.4em;
 }
 
 .looks ul {
@@ -37,15 +55,19 @@ ul {
 }
 
 .looks .look {
-  background-color: #E9E9E9;
   font-size: 1.25em;
   &:hover{
-    background-color: #DCDCDC;
+    background-color: #f5f5f5;
   }
-  padding: 0.35em;
+  padding: 0.2em 0.2em 0.7em 0.2em;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  margin: 0.4em 0em 0.4em 0em;
+  background-color: #fcf8e3;
 }
 
-.looks .delete_button {
+.looks .buttons {
   float: right;
 }
 
@@ -61,15 +83,26 @@ ul {
 }
 
 .auction {
-  background-color: #E9E9E9;
-  padding: 0.1em 0.25em 0.1em 0.25em;
+  padding: 0.2em 0.2em 0.7em 0.2em;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  font-size: 0.9em;
   height: 3em;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 }
 
-.price {
-  width: 6em;
+.auction-title {
+  display: inline;
 }
-.price span{
+
+.auction-price {
+  width: 6em;
+  display: inline;
+}
+
+.auction-price span{
   display: block;
   text-align: left;
 }
@@ -86,3 +119,5 @@ ul {
 .hide-auction {
   display: none;
 }
+
+
