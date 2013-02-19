@@ -32,6 +32,7 @@ ul {
  }
 iframe {
   margin-bottom: 5em;
+  height: 80%;
 }
 
  @media (max-width: 767px) {
@@ -112,6 +113,10 @@ iframe {
 .auction-price span{
   display: block;
   text-align: left;
+}
+
+.footer {
+  text-align: right;
 }
 
 .form-horizontal .control-label {
