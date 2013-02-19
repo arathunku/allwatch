@@ -28,5 +28,6 @@
     </div>
     <%= debug(params) if Rails.env.development? %>
   </div>
+  <%= render 'shared/ga_code' if RAILS_ENV == 'production' %>
 </body>
 </html>

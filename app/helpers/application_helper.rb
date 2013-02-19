@@ -15,4 +15,5 @@ module ApplicationHelper
   def render_404
     raise ActionController::RoutingError.new('Nie ma takiej strony')
   end
+
 end

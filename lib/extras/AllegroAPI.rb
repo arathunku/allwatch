@@ -19,7 +19,7 @@ class AllegroAPI
   def do_search(search_hash)
     raise ArgumentError, "Search-string not specified" if search_hash["search-string"].nil?
     if (search_hash["search-limit"].nil?) || (search_hash["search-limit"] > 100) || (search_hash["search-limit"] < 0)
-      search_hash["search-limit"] = 50
+      search_hash["search-limit"] = 100
     end
     if limit?
       message = Hash.new
