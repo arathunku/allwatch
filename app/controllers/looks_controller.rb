@@ -8,17 +8,24 @@ class LooksController < ApplicationController
 
   def create
     unless params_proper?(params[:look_for])
-      flash[:error] = "Ceny muszą być liczbami nieujmnymi"
-      redirect_to root_path
+      respond_to do |format|
+        flash[:error] = "Ceny muszą być liczbami nieujmnymi"
+        format.html { redirect_to root_path }
+        format.js { render js: "window.location = '/'"}
+      end
+      
     else
       @look = Look.prepare(current_user, params)
       if @look.save
         flash[:success] = "Aukcja dodana, za chwilę powinien przyjść e-mail."
-        Allegro.check_for_new_auctions(@look.id)
-        redirect_to root_path
+        #Allegro.check_for_new_auctions(@look.id)
+        sleep(5)
       else
         flash[:error] = "Coś poszło nie tak. Spróbuj ponownie lub skontaktuj się z administratorem."
-        redirect_to root_path
+      end
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js { render js: "window.location = '/'"}
       end
     end
   end
@@ -33,8 +40,12 @@ class LooksController < ApplicationController
 
   def refresh
     Allegro.check_for_new_auctions(params[:id])
-    flash[:success] = "Za chwilę spis nowych aukcji będzie na adresie podanym przy rejestracji."
-    redirect_to root_path
+    respond_to do |format|
+      flash[:success] = "Za chwilę spis nowych aukcji będzie na adresie podanym przy rejestracji."
+      format.html { redirect_to root_path }
+      format.js { render js: "window.location = '/'"}
+    end
+    
   end
 
   def delete
@@ -45,7 +56,7 @@ class LooksController < ApplicationController
     def params_proper?(p)
       unless p[:search_price_from].empty? && p[:search_price_to].empty?
         if is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])
-          p[:search_price_from].to_f < p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
+          p[:search_price_from].to_f <= p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
         else
           nil
         end

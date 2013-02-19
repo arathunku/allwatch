@@ -1,0 +1,14 @@
+$(document).ready(function() {
+  $(".auction").click(function(){
+    var id = $(this).attr('id');
+    $(".sidebar").empty().html("<iframe src='http://m.allegro.pl/item/index/id/"+ id +"'></iframe>");
+  });
+
+    $('.buttons a:first').click(function(){
+      $(this).siblings('.spinner').show();
+    });
+
+    $('.new-look').bind('ajax:beforeSend', function(evt, xhr, settings){
+      $(".sidebar").empty().html('<div class="spinner-big"><%= image_tag("spinner_big.gif") %><span class="spinner-big-text">Dodawanie i pobieranie aukcji..</span></div>');
+    });
+});

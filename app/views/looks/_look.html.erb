@@ -3,7 +3,10 @@
   <li>
     <div class="look">
       <div class="buttons">
-        <%= link_to refresh_user_look_path(current_user, look), remote: true, title: "Odśwież" do %>
+        <div class="spinner">
+          <%= image_tag('spinner.gif') %>
+        </div>
+        <%= link_to refresh_user_look_path(current_user, look), remote: true, title: "Odśwież", id: "icon-refresh" do %>
           <i class="icon-refresh"></i> 
         <% end %>
         <%= link_to user_look_path(current_user, look), title: "Opcje" do %>

@@ -22,6 +22,23 @@ ul {
   padding-left: 1em !important;
   padding-right: 1em !important;
 }
+.spinner {
+  display: inline-block;
+  float: left;
+  margin-right: 0.5em;
+  line-height: 14px;
+  vertical-align: text-top;
+  display: none;
+}
+
+.spinner-big {
+
+}
+.spinner-big-text {
+  display: block;
+  text-align: center;
+  margin-top: 0.5em;
+}
 
 .sidebar {
     position:fixed;
@@ -30,6 +47,7 @@ ul {
     height: 100%;
     text-align: center;
  }
+
 iframe {
   margin-bottom: 5em;
   height: 80%;
@@ -116,7 +134,8 @@ iframe {
 }
 
 .footer {
-  text-align: right;
+  margin-top: 3em;
+  margin-bottom: 0.5em;
 }
 
 .form-horizontal .control-label {

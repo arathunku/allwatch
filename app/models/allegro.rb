@@ -10,7 +10,6 @@ class Allegro
     else
       looks = [Look.find_by_id(id)]
     end
-    #find_each use
     looks.each do |l|
       hash_to_ask = ActiveSupport::JSON.decode(l[:look_query]).symbolize_keys
       hash_to_ask = hash_to_ask.each_with_object({}) do |(k,v), h|
@@ -38,7 +37,7 @@ class Allegro
     send_notification_about_auctions
   end
 
-  #temporary later move it to the checking for auctions and simplify 
+  #temporary, later move it to the checking for auctions and simplify 
   def self.send_notification_about_auctions(id=nil)
     # Auction.where('auctions.updated_at == auctions.created_at')
     if id.nil?
@@ -53,7 +52,7 @@ class Allegro
         Notifier.notification(user, l, body).deliver
         body.each { |b| b.touch }
       end
-      puts "Ogarnieto #{l.name_query} -- #{body.length}"
+      puts "Done: #{l.name_query} -- #{body.length}"
     end
   end
 end
