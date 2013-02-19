@@ -19,6 +19,8 @@ ul {
   background-color: #FF6701;
   max-width: 940px;
   margin: auto;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
 }
 
 .sidebar {
@@ -26,7 +28,11 @@ ul {
     top:60px;
     width:21.97%;
     height: 100%;
+    text-align: center;
  }
+iframe {
+  margin-bottom: 5em;
+}
 
  @media (max-width: 767px) {
     .sidebar {

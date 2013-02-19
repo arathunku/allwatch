@@ -43,10 +43,15 @@ class LooksController < ApplicationController
 
   private
     def params_proper?(p)
-      if is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])
-        p[:search_price_from].to_f < p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
+      unless p[:search_price_from].empty? && p[:search_price_to].empty?
+        if is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])
+          p[:search_price_from].to_f < p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
+        else
+          nil
+        end
       else
-        nil
+        p[:search_price_from] = "0"
+        true
       end
     end
     def is_numeric?(i)
