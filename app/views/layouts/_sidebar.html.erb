@@ -1,5 +1,7 @@
 <% if signed_in? %>
-  <% if @looks.nil? %>
-    Kliknij w jakąś aukcję
+  <% unless @looks.nil? %>
+    <% if @looks.length > 0 %>
+      Kliknij w jakąś aukcję
+    <% end %>
   <% end %>
 <% end %>
