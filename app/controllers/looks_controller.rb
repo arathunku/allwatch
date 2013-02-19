@@ -18,8 +18,7 @@ class LooksController < ApplicationController
       @look = Look.prepare(current_user, params)
       if @look.save
         flash[:success] = "Aukcja dodana, za chwilę powinien przyjść e-mail."
-        #Allegro.check_for_new_auctions(@look.id)
-        sleep(5)
+        Allegro.check_for_new_auctions(@look.id)
       else
         flash[:error] = "Coś poszło nie tak. Spróbuj ponownie lub skontaktuj się z administratorem."
       end
