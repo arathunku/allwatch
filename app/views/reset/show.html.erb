@@ -1,4 +1,4 @@
-<%= form_for @user, url: reset_path(@user),html: {class: "form-horizontal"} do |f| %>
+<%= form_for @user, url: update_reset_path(@user, @pass),html: {class: "form-horizontal"} do |f| %>
   <%= render 'shared/error_message' %>
       <div class="control-group">
         <%= f.label :password_new, "Nowe hasło" , for: "inputNewPassword", class: "control-label" %>

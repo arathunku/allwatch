@@ -8,7 +8,14 @@ class ResetController < ApplicationController
   #handling subbmited new password id
   def update
     @user = User.find_by_id(params[:id])
-    if !@user.nil? && @user.reset_password?(params[:user])
+    if @user
+      if CGI.escape(Base64.strict_encode64(Digest::SHA256.new.digest(@user.password_digest))) != CGI.escape(params[:reset_token])
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
+    if @user.reset_password?(params[:user])
       flash[:success] = "Hasło zostało zmienione. Można się zalogować."
       redirect_to root_path
     else

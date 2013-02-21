@@ -49,21 +49,32 @@ class LooksController < ApplicationController
 
   def delete
     @look = Look.find_by_id(params[:id])
+    redirect_to root_path if @look.nil?
   end
 
   private
     def params_proper?(p)
-      unless p[:search_price_from].empty? && p[:search_price_to].empty?
-        if is_numeric?(p[:search_price_from]) && is_numeric?(p[:search_price_to])
-          p[:search_price_from].to_f <= p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
+      #CORRECT tHIS!!!!!! 
+      if p[:search_price_from].empty? && p[:search_price_to].empty?
+        return true
+      end
+      if !p[:search_price_to].empty?
+        if !is_numeric?(p[:search_price_to])
+          return nil
         else
-          nil
+          if !p[:search_price_from].empty? && is_numeric?(p[:search_price_from])
+            return p[:search_price_from].to_f <= p[:search_price_to].to_f && p[:search_price_from].to_f >= 0
+          end
         end
       else
-        p[:search_price_from] = "0"
-        true
+        if is_numeric?(p[:search_price_from])
+           return p[:search_price_from].to_f >= 0
+        else
+          return nil
+        end
       end
     end
+
     def is_numeric?(i)
       i.to_i.to_s == i || i.to_f.to_s == i
     end

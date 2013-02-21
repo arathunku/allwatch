@@ -1,62 +1,63 @@
 <table border="0" cellpadding="0" cellspacing="0" align="center" style="
                                                                         background-color: #f5f5f5;
                                                                         font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-                                                                        width: 620">
+                                                                        width: 620px;">
   <tbody>
     <tr>
       <td colspan="3">
         <div class="header" style="font-size: 3em;
                                    text-align: center;
                                    color: grey;
-                                   padding-bottom: 1em;
-                                   ">allWatch
+                                   padding-bottom: 0.5em;
+                                   padding-top: 0.5em;
+                                   "><%= link_to "allWatch", root_url, style: "color: #0084b4;" %>
         </div>
       </td>
     </tr>
   </tbody>
   <tbody>
     <tr>
-      <td style="border-bottom-style: solid; 
-                 border-bottom-color: grey;
-                 border-bottom-width:2px;
-                 padding-left: 0.25em;
-                 ">Nazwa</td>
-      <td style="border-bottom-style: solid;
-                 border-bottom-color: grey;
-                 border-bottom-width:2px; 
-                 text-align: center;
+      <td style="padding: 8px;
+                line-height: 20px;
+                text-align: left;
+                vertical-align: top;
+                border-top: 1px solid #dddddd;
+                 ">Tytuł aukcji</td>
+      <td style="padding: 8px;
+                line-height: 20px;
+                text-align: left;
+                vertical-align: top;
+                border-top: 1px solid #dddddd;
                  ">Kup teraz</td>
-      <td style="border-bottom-style: solid;
-                 border-bottom-color: grey;
-                 border-bottom-width:2px; 
-                 text-align: center;">Licytacja</td>
+      <td style="padding: 8px;
+                line-height: 20px;
+                text-align: left;
+                vertical-align: top;
+                border-top: 1px solid #dddddd;
+                text-align: center;">Licytacja</td>
     </tr>
     <% @auctions.each do |auction|%>
-    <tr style="line-height: 2.5em;">
-      <td style="border-bottom-width: 1px; 
-                border-bottom-style: dashed; 
-                border-bottom-color: grey;
-                padding-left: 0.5em">
+    <tr style="line-height: 1.5em;">
+      <td style="padding: 5px;
+                 text-align: left;
+                 vertical-align: top;
+                 border-top: 1px solid #dddddd;">
         <a href="http://www.allegro.pl/i<%= auction.auction_id %>.html" 
         style="text-decoration: none;
                color: #0084b4;"target="_blank"><%= auction.name %></a>
       </td>
-      <td style="width: 5em; 
-                border-left-style: solid; 
-                border-left-color: grey;
-                border-left-width:3px;
-                border-bottom-width: 1px;
-                border-bottom-style: dashed; 
-                border-bottom-color: grey;
-                text-align: center;"><%= auction.price_buy %> zł</td>
       <td style="width: 5em;
-                 border-left-style: solid;
-                 border-left-color: grey;
-                 border-left-width:3px;
-                 border-bottom-width: 1px;
-                 border-bottom-style: dashed;
-                 border-bottom-color: grey;
-                 text-align: center;"><%= auction.price_atm %> zł</td>
+                 padding: 5px;
+                 text-align: left;
+                 vertical-align: top;
+                 border-top: 1px solid #dddddd;">
+                  <%= "#{auction.price_buy} zł" if auction.price_buy>0 %></td>
+      <td style="width: 5em;
+                 padding: 5px;
+                 text-align: left;
+                 vertical-align: top;
+                 border-top: 1px solid #dddddd;">
+                <%= "#{auction.price_atm} zł" if auction.price_atm>0 %></td>
     </tr> 
     <% end %>
   </tbody>

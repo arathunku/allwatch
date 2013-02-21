@@ -13,7 +13,7 @@ AllwatchSite::Application.routes.draw do
   match '/reset/:id/:reset_token', to: "reset#show",  via: :get, as: :reset
   match '/reset', to: "reset#create",  via: :post
 
-  match '/reset/:id/:reset_token', to: "reset#update",  via: :put
+  match '/reset/:id/:reset_token', to: "reset#update",  via: :put, as: :update_reset
 
 
   match "/signup",     to: "users#new"
