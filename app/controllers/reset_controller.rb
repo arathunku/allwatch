@@ -21,12 +21,14 @@ class ResetController < ApplicationController
   def show
     @user = User.find_by_id(params[:id])
     params[:reset_token] ||= ""
-    unless @user.nil?
+    if @user
       if CGI.escape(Base64.strict_encode64(Digest::SHA256.new.digest(@user.password_digest))) != CGI.escape(params[:reset_token])
         redirect_to root_path
       end
+      @pass = CGI.escape(Base64.strict_encode64(Digest::SHA256.new.digest(@user.password_digest)))
+    else
+      redirect_to root_path
     end
-    @pass = CGI.escape(Base64.strict_encode64(Digest::SHA256.new.digest(@user.password_digest)))
   end
 
   #view where you put email
