@@ -9,7 +9,7 @@ $(document).ready(function() {
     });
 
     $('.new-look').bind('ajax:beforeSend', function(evt, xhr, settings){
-      $('.submit-look').parent('div').append('<button type="button" class="btn disabled" disabled="disabled">Ładowanie...</button>');
+      $('.submit-look').parent('div').find('.dodatkowe-opcje').before('<button type="button" class="btn disabled" disabled="disabled">Ładowanie...</button>');
       $('.submit-look').remove();
     });
 });

@@ -37,28 +37,30 @@
                 text-align: center;">Licytacja</td>
     </tr>
     <% @auctions.each do |auction|%>
-    <tr style="line-height: 1.5em;">
-      <td style="padding: 5px;
-                 text-align: left;
-                 vertical-align: top;
-                 border-top: 1px solid #dddddd;">
-        <a href="http://www.allegro.pl/i<%= auction.auction_id %>.html" 
-        style="text-decoration: none;
-               color: #0084b4;"target="_blank"><%= auction.name %></a>
-      </td>
-      <td style="width: 5em;
-                 padding: 5px;
-                 text-align: left;
-                 vertical-align: top;
-                 border-top: 1px solid #dddddd;">
-                  <%= "#{auction.price_buy} zł" if auction.price_buy>0 %></td>
-      <td style="width: 5em;
-                 padding: 5px;
-                 text-align: left;
-                 vertical-align: top;
-                 border-top: 1px solid #dddddd;">
-                <%= "#{auction.price_atm} zł" if auction.price_atm>0 %></td>
-    </tr> 
+      <% if auction.show? == "show-auction" %>
+        <tr style="line-height: 1.5em;">
+          <td style="padding: 5px;
+                     text-align: left;
+                     vertical-align: top;
+                     border-top: 1px solid #dddddd;">
+            <a href="http://www.allegro.pl/i<%= auction.auction_id %>.html" 
+            style="text-decoration: none;
+                   color: #0084b4;"target="_blank"><%= auction.name %></a>
+          </td>
+          <td style="width: 5em;
+                     padding: 5px;
+                     text-align: left;
+                     vertical-align: top;
+                     border-top: 1px solid #dddddd;">
+                      <%= "#{auction.price_buy} zł" if auction.price_buy>0 %></td>
+          <td style="width: 5em;
+                     padding: 5px;
+                     text-align: left;
+                     vertical-align: top;
+                     border-top: 1px solid #dddddd;">
+                    <%= "#{auction.price_atm} zł" if auction.price_atm>0 %></td>
+        </tr> 
+      <% end %>
     <% end %>
   </tbody>
   <tbody>

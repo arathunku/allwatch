@@ -124,7 +124,7 @@ iframe {
 }
 
 .auction-price {
-  width: 6em;
+  min-width: 6em;
   display: inline;
 }
 
@@ -154,4 +154,15 @@ iframe {
   display: none;
 }
 
+.new-look {}
+.dodatkowe-opcje {
+  margin-top: 1em;
+}
 
+.dodatkowe-opcje a{
+  color: #005580;
+}
+
+#dodatkowe-opcje-chowane {
+  margin-top: 1em;
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212122639) do
+ActiveRecord::Schema.define(:version => 20130221222733) do
 
   create_table "auctions", :force => true do |t|
     t.integer  "look_id"
@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(:version => 20130212122639) do
     t.integer  "user_id"
     t.string   "name_query"
     t.text     "look_query"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "offer_type", :default => 0
   end
 
+  add_index "looks", ["offer_type"], :name => "index_looks_on_offer_type"
   add_index "looks", ["user_id", "name_query"], :name => "index_looks_on_user_id_and_name_query"
 
   create_table "users", :force => true do |t|

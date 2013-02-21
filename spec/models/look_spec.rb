@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: looks
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  name_query :string(255)
+#  look_query :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  offer_type :integer          default(0)
+#
+
 require 'spec_helper'
 
 describe Look do

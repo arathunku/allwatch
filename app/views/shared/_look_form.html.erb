@@ -1,8 +1,29 @@
 <%= form_for(:look_for, url: user_looks_path(current_user, @new_look), remote: true, html: { class: "new-look"} ) do |f| %>
- <div class="form-horizontal">
+  <div class="form-horizontal">
     <%= f.text_field :search_string, placeholder: "Szukam..", class: "span6" %>
     <%= f.text_field :search_price_from, placeholder: "Cena od:", class: "span2" %>
     <%= f.text_field :search_price_to, placeholder: "Cena do:", class: "span2" %>
     <%= f.submit "Śledź", class: "btn submit-look span2" %>
+    <div class="dodatkowe-opcje">
+      <a class="collapsed" data-toggle="collapse" href="#dodatkowe-opcje-chowane">
+        Dodatkowe opcje..
+      </a>
+      <div id="dodatkowe-opcje-chowane" class="collapse">
+        <div id="dodatkowe-type">
+          <label class="radio">
+            <input type="radio" name="offer_type" id="auctionParam" value="0" checked>
+            Wszystkie aukcje
+          </label>
+          <label class="radio">
+            <input type="radio" name="offer_type" id="buyNowParam" value="1">
+            Kup Teraz!
+          </label>
+          <label class="radio">
+            <input type="radio" name="offer_type" id="auctionParam" value="2">
+            Licytacje
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

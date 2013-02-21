@@ -7,6 +7,11 @@ class LooksController < ApplicationController
   end
 
   def create
+    # offer_type: 
+    #  *0 - all auctions
+    #  *1 - only BUY NOW 
+    #  *2 - only Licytacje
+
     unless params_proper?(params[:look_for])
       respond_to do |format|
         flash[:error] = "Ceny muszą być liczbami nieujmnymi"
@@ -15,6 +20,7 @@ class LooksController < ApplicationController
       end
       
     else
+      #prepare - method in model
       @look = Look.prepare(current_user, params)
       if @look.save
         flash[:success] = "Aukcja dodana, za chwilę powinien przyjść e-mail."
