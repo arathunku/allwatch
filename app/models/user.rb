@@ -47,6 +47,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def reset_password?(user)
+    unless user[:password_new] == user[:password_confirmation_new]
+      return false
+    end
+    self.password_confirmation = user[:password_confirmation_new]
+    self.password = user[:password_new]
+    if save
+      return true
+    else
+      return false
+    end
+  end
+
   private
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64

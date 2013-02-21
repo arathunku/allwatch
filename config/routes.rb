@@ -8,6 +8,14 @@ AllwatchSite::Application.routes.draw do
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :admin 
+  resources :reset, only: [:index]
+
+  match '/reset/:id/:reset_token', to: "reset#show",  via: :get, as: :reset
+  match '/reset', to: "reset#create",  via: :post
+
+  match '/reset/:id/:reset_token', to: "reset#update",  via: :put
+
+
   match "/signup",     to: "users#new"
   match '/signin',     to: "sessions#new"
   match '/signout',    to: "sessions#destroy", via: :delete

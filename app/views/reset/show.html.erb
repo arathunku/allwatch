@@ -1,0 +1,20 @@
+<%= form_for @user, url: reset_path(@user),html: {class: "form-horizontal"} do |f| %>
+  <%= render 'shared/error_message' %>
+      <div class="control-group">
+        <%= f.label :password_new, "Nowe hasło" , for: "inputNewPassword", class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password_new, id: "inputNewPassword" %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password_confirmation_new, "Powtórz nowe hasło", for: "inputConfirmation", class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password_confirmation_new, id: "inputConfirmation" %>
+        </div>
+      </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Zmień hasło", class: "btn btn-large" %>
+      </div>
+    </div>
+<% end %>

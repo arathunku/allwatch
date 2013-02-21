@@ -32,7 +32,6 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     if @user.change_password?(params[:user])
       flash[:success] = "Hasło zostało zmienione."
-      @user = User.find_by_id(params[:id])
       sign_in @user
       redirect_to root_path
     else

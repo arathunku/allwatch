@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_back_or root_url
     else
-      flash[:error] = 'Złe hasło/email'
+      flash[:error] = "Złe hasło/email. Aby zresetować hasło przejdz <a href='#{url_for(reset_index_path)}'>tutaj</a>".html_safe
       redirect_to root_url
     end
   end

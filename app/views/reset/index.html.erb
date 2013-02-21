@@ -1,0 +1,9 @@
+<h4>
+  Wpisz e-mail na który ma zostać wysłany link aby zresetować hasło
+</h4>
+<%= form_for reset_index_path do  %>
+ <div class="form-horizontal">
+    <%= text_field_tag :email,nil, placeholder: "E\-mail", class: "span6" %>
+    <%= submit_tag  "Przypomnij", class: "btn" %>
+  </div>
+<% end %>

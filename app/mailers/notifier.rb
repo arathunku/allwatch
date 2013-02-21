@@ -32,4 +32,18 @@ class Notifier < ActionMailer::Base
       format.text
     end
   end
+
+  def password_reset(user, pass)
+    headers['X-MC-Autotext'] = 'true'
+    headers['X-MC-Tags'] = 'password_reset'
+
+    @user = user
+    @pass = pass
+
+    mail(to: user.email, subject: "allWatch - password reset ") do |format|
+      format.html
+      format.text
+    end
+
+  end
 end
