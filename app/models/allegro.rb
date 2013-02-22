@@ -28,8 +28,10 @@ class Allegro
           price_atm = 0 if price_buy == price_atm
           end_time = Time.at(item[:s_it_ending_time].to_i).utc
           auction_id = item[:s_it_id]
+          #debugger
+          auction_type = offer_type?(price_atm, price_buy)
           r = l.auctions.where(auction_id: auction_id).first_or_initialize
-          r.update_attributes(name: name, price_atm: price_atm, price_buy: price_buy, end_time: end_time)
+          r.update_attributes(name: name, price_atm: price_atm, price_buy: price_buy, end_time: end_time, auction_type: auction_type)
         end
       end
       l.touch
@@ -46,7 +48,7 @@ class Allegro
       looks = [Look.find_by_id(id)]
     end
     looks.each do |l|
-      body = l.auctions.where("auctions.updated_at = auctions.created_at AND auctions.end_time > '#{Time.now.strftime('%Y-%m-%d %H:%M:%S.000000')}'")
+      body = l.auctions.where("auctions.updated_at = auctions.created_at AND auctions.end_time > '#{Time.now.strftime('%Y-%m-%d %H:%M:%S.000000')}' AND auctions.auction_type = #{l.offer_type}")
       if body.length != 0 
         user = User.find_by_id(l.user_id)
         Notifier.notification(user, l, body).deliver
@@ -55,6 +57,17 @@ class Allegro
       puts "Done: #{l.name_query} -- #{body.length}"
     end
   end
+
+  def self.offer_type?(price_atm, price_buy)
+    if price_atm == "0" && price_buy != "0"
+      1
+    elsif price_buy == "0" && price_atm != "0"
+      2
+    else
+      0
+    end
+  end
+
 end
 
 class String
