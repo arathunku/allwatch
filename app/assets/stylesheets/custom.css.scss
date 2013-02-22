@@ -141,6 +141,9 @@ iframe {
 .form-horizontal {
   margin-left: 2.5em;
 }
+.alert-error-single {
+  display: block;
+}
 .form-horizontal .control-label {
   float: left;
   width: 160px;
@@ -149,6 +152,10 @@ iframe {
 }
 .form-horizontal .controls {
   margin-left: 180px;
+}
+.form-additional-text {
+  color: grey;
+  margin-left: 0.25em;
 }
 .hide-auction {
   display: none;

@@ -1,8 +1,8 @@
 <%= provide(:title, "Rejestracja")  %>
-<%= form_for @user, html: {class: "form-horizontal"} do |f| %>
+<%= form_for @user,  html: {class: "form-horizontal"} do |f| %>
   <%= render 'shared/error_message' %>
     <div class="control-group">
-      <%= f.label :email, for: "inputEmail", class: "control-label" %>
+      <%= f.label :email, for: "inputEmail", class: "control-label"%>
       <div class="controls">
         <%= f.text_field :email, id: "inputEmail" %>
       </div>
@@ -11,6 +11,7 @@
       <%= f.label :password, "Hasło", for: "inputPassword", class: "control-label" %>
       <div class="controls">
         <%= f.password_field :password, id: "inputPassword" %>
+      <span class="form-additional-text">minimum 6 znaków</span>
       </div>
     </div>
     <div class="control-group">

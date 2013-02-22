@@ -8,12 +8,12 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Hej! Zacznij coś obserwować, a po chwili dostaniesz email z aukcjami!"
-      begin
-        Notifier.welcome_email(@user.email).deliver
-      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-        flash[:success] = "Konto zostało utworzone, niestety były problemy z wysłaniem email."
-      end
+      flash[:success] = "Hej! Zacznij coś obserwować, a po chwili dostaniesz email z aukcjami! Na początku zostanie wysłane maksymalnie 100 aukcji, a w kolejnych mailach tylko nowe."
+      #begin
+      #  Notifier.welcome_email(@user.email).deliver
+      #rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+        #flash[:success] = "Konto zostało utworzone, niestety były problemy z wysłaniem email."
+      #end
       redirect_to root_path
     else 
       flash[:error] = @user.errors.full_messages

@@ -7,7 +7,9 @@ AllwatchSite::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :admin 
+  resources :admin, execept: [:new] do
+    delete 'look_delete', on: :member
+  end
   resources :reset, only: [:index]
 
   match '/reset/:id/:reset_token', to: "reset#show",  via: :get, as: :reset
@@ -21,4 +23,6 @@ AllwatchSite::Application.routes.draw do
   match '/signout',    to: "sessions#destroy", via: :delete
   match '/blog/about', to: "static_page#about"
   match '/users/:id/settings', to: "users#edit"
+
+  match '/admin/:id/look/:look_id', to: "admin#look_delete", via: :delete, as: :admin_look_delete
 end

@@ -6,7 +6,7 @@
         <li class="<%=is_active('home')%>"><%= link_to 'Główna', root_path %></li>
         <li class="<%=is_active('about')%>"><%= link_to 'Co to?', blog_about_path %></li>
         <% if is_admin? %>
-          <li class="<%=is_active('admin')%>"><%= link_to 'admin', admin_index_path %></li>
+          <li class="<%=is_active('index')%>"><%= link_to 'admin', admin_index_path %></li>
         <% end %>
       </ul>
       <div class="break"></div>

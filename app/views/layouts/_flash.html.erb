@@ -1,8 +1,10 @@
 <% unless flash.nil? %>
   <% flash.each do |key, value| %>
-      <% value = [value] %>
-      <% value.each do |v|%>
-        <div class="alert alert-<%= key %>"><%= v %></div>
-      <% end %>
+      <% value = [value].flatten %>
+      <div class="alert alert-<%= key %>">
+        <% value.each do |v|%>
+          <span class="alert-error-single"><%= v %></span>
+        <% end %>
+      </div>
   <% end %>
 <% end %>

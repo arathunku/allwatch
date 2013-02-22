@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
   
   def render_404
-    raise ActionController::RoutingError.new('Nie ma takiej strony')
+    raise ActionController::RoutingError.new('Nie ma takiej strony.')
   end
 
 end

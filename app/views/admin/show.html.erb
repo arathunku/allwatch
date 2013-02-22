@@ -22,12 +22,19 @@
     <td>id</td>
     <td>nazwa</td>
     <td>aukcji</td>
+    <td></td>
   </tr>
   <% @looks.each do |look| %>
   <tr>
     <td><%= look.id %></td>
     <td><%= look.name_query %></td>
     <td><%= look.auctions.length %></td>
+    <td>
+        <%= link_to admin_look_delete_path(@user, look.id), method: :delete,
+                                           data: { confirm: "Czy na pewno chcesz to usunąć?" }, title: "Usuń" do %>
+         <i class="icon-trash"></i> 
+        <% end %>
+    </td>
   </tr>
   <% end %>
 </table>

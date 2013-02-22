@@ -14,7 +14,7 @@ class LooksController < ApplicationController
 
     unless params_proper?(params[:look_for])
       respond_to do |format|
-        flash[:error] = "Ceny muszą być liczbami nieujmnymi"
+        flash[:error] = "Ceny muszą być liczbami nieujmnymi."
         format.html { redirect_to root_path }
         format.js { render js: "window.location = '/'"}
       end
@@ -38,7 +38,7 @@ class LooksController < ApplicationController
   def destroy
     @look = current_user.looks.find_by_id(params[:id])
     unless @look.destroy
-      flash[:error] = "Coś poszło nie tak i niestety nie udało się usunąć."
+      flash[:error] = "Coś poszło nie tak i niestety nie udało się usunąć tego."
     end
     redirect_to root_path
   end
@@ -46,7 +46,7 @@ class LooksController < ApplicationController
   def refresh
     Allegro.check_for_new_auctions(params[:id])
     respond_to do |format|
-      flash[:success] = "Za chwilę spis nowych aukcji będzie na adresie podanym przy rejestracji."
+      flash[:success] = "Za chwilę spis nowych aukcji będzie na mailu podanym przy rejestracji."
       format.html { redirect_to root_path }
       format.js { render js: "window.location = '/'"}
     end

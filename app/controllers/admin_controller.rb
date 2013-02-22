@@ -20,6 +20,15 @@ class AdminController < ApplicationController
     redirect_to admin_index_path
   end
 
+  def look_delete
+    @look = Look.find_by_id(params[:look_id])
+    unless @look.destroy
+      flash[:error] = "Coś poszło nie tak i niestety nie udało się usunąć tego."
+    else
+      flash[:notice] = "Usunięto, wszystko w porządku."
+    end
+    redirect_to admin_path(params[:id])
+  end
 
   protected
   def admin?

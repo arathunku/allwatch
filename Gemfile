@@ -6,6 +6,8 @@ gem "bcrypt-ruby", "~> 3.0.1"
 gem 'faker', '1.0.1'
 gem 'jquery-rails'
 gem "mail", "~> 2.4.3"
+gem 'rails-i18n'
+gem 'client_side_validations'
 
 
 #ALLEGRO
