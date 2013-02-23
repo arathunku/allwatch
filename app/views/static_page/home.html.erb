@@ -1,7 +1,6 @@
 <% provide(:title, 'Strona Główna') %>
 <% if signed_in? %>
   <%= render 'shared/look_form' %>
-  Odświeżanie aukcji zależy m.in. od szybkości Allegro i strona może ładować się dłuższą chwilę po kliknięciu przycisku odśwież, proszę poczekać.
   <%= render 'looks/look' %>
 <% else %>
   <div class="hero-unit">
