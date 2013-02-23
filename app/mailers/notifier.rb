@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default from: "allwatch@arathunku.com"
+  default from: "pmon@arathunku.com"
   
   #-----initializers hidden from source code----#
   #ActionMailer::Base.delivery_method = :smtp
@@ -16,7 +16,7 @@ class Notifier < ActionMailer::Base
     headers['X-MC-Autotext'] = 'true'
     headers['X-MC-Tags'] = 'welcome'
 
-    mail(to: to, subject: "Witaj - allwatch!") do |format|
+    mail(to: to, subject: "Witaj - Powiadom Mnie o Nowych!") do |format|
       format.html
     end
   end
@@ -40,7 +40,7 @@ class Notifier < ActionMailer::Base
     @user = user
     @pass = pass
 
-    mail(to: user.email, subject: "allWatch - password reset ") do |format|
+    mail(to: user.email, subject: "PMON - password reset ") do |format|
       format.html
       format.text
     end

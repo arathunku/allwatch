@@ -1,5 +1,5 @@
   def full_title(page_title)
-    base_title = "AllWatch"
+    base_title = "PMON"
     if page_title.empty?
       base_title
     else
