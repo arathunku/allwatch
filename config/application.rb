@@ -57,7 +57,7 @@ module AllwatchSite
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.action_mailer.default_url_options = { :host => "allwatch.herokuapp.com" }
+    config.action_mailer.default_url_options = { :host => "powiadom.mnie.o.nowych.pl" }
 
   end
 end
