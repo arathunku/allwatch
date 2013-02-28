@@ -33,10 +33,9 @@ class Auction < ActiveRecord::Base
 
 
   def show?
-    if Time.now > self.end_time || self.auction_type !=  Look.find_by_id(self.look_id).offer_type
-      "hide-auction"
-    else 
-      "show-auction"
-    end
+    l_offer = Look.find_by_id(self.look_id).offer_type
+    r = "hide-auction" if Time.now > self.end_time
+    r = "hide-auction" if self.auction_type != l_offer && l_offer != 0 
+    r ||= "show-auction"
   end
 end
