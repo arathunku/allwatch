@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130222145112) do
   end
 
   add_index "auctions", ["auction_id"], :name => "index_auctions_on_auction_id"
-  add_index "auctions", ["look_id", "price_atm", "price_buy", "name", "end_time"], :name => "altered_auctions_index"
+  add_index "auctions", ["look_id", "price_atm", "price_buy", "name", "end_time"], :name => "auctions_index"
 
   create_table "looks", :force => true do |t|
     t.integer  "user_id"
