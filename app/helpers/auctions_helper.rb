@@ -4,11 +4,12 @@ module AuctionsHelper
     auctions.each do |a|
       sum += a.get_price
     end
-    (sum/auctions.length.to_f).round(2) 
+    auctions.length != 0 ? (sum/auctions.length.to_f).round(2) : 0
   end
 
   def mediana(auctions)
     i = (auctions.length).to_f / 2
+    return 0 if auctions.length == 0
     auctions.length.odd? ? auctions[i].get_price : (auctions[i].get_price + auctions[i+1].get_price) / 2.0
   end
 
