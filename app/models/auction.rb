@@ -38,4 +38,7 @@ class Auction < ActiveRecord::Base
     r = "hide-auction" if self.auction_type != l_offer && l_offer != 0 
     r ||= "show-auction"
   end
+  def get_price
+    self.price_buy != 0 ? self.price_buy.to_f : self.price_atm.to_f
+  end
 end

@@ -20,8 +20,15 @@
       <div class="name">
         <span class="content"><%= link_to look.name_query,  user_look_path(current_user, look) %></span>
       </div>
+      <div class="look-stats">
+        <ul> 
+          <li>średnia: <%= avg(look.auctions) %> zł</li>
+          <li>mediana: <%= mediana(look.auctions) %> zł</li>
+          <li>odychlenie: <%= std_dev(look.auctions) %> zł</li>
+        </ul>
+      </div>
     </div>
-    <ul>
+    <ul class="auctions">
       <% look.auctions.each do |auction|%>
         <li class="auction <%= auction.show? %>" id="<%= auction.auction_id %>">
           <div class="auction-title">
