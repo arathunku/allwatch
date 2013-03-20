@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem "bootstrap-sass", "~> 2.2.2.0"
 gem "bcrypt-ruby", "~> 3.0.1"
 gem 'faker', '1.0.1'
@@ -23,10 +23,8 @@ group :assets do
 end
 
 group :development, :test do
-  #gem 'sqlite3'
-  gem "rspec-rails", "2.12.2"
+  gem "rspec-rails", "~> 2.0"
   gem "guard-rspec", "2.4.0"
-  #windows gem "wdm", "~> 0.1.0"
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
   gem 'debugger'
@@ -35,10 +33,7 @@ end
 
 group :test do
   gem "capybara", "2.0.2"
-  #gem 'win32console', '1.3.0'
-  gem 'rb-fchange', '0.0.5'
-  gem 'rb-notifu', '0.0.4'
-  gem 'factory_girl_rails', '4.2.0'
+  gem 'factory_girl_rails', '4.2.1'
 
 end
 
