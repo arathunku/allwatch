@@ -10,7 +10,7 @@ gem 'rails-i18n'
 gem 'client_side_validations'
 gem 'execjs'
 gem 'therubyracer'
-
+gem 'scheduler_daemon'
 #ALLEGRO
 gem "savon", "~> 2.1.0"
 gem "httpclient", "~> 2.3.2"

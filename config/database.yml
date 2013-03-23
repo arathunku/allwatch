@@ -52,5 +52,5 @@ production:
   password: 123456
   pool: 5
   timeout: 5000
-  port: 5434
+  port: 5432
   host: localhost
