@@ -14,3 +14,6 @@
 /log/*.log
 /tmp
 /config/initializers/allegro_envs.rb
+/log/scheduler_daemon.pid
+/log/scheduler_daemon_monitor.pid
+
