@@ -12,6 +12,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.output
 /tmp
 /config/initializers/allegro_envs.rb
 /log/scheduler_daemon.pid
