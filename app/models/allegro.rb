@@ -55,7 +55,7 @@ class Allegro
         body.each { |b| b.touch }
       end
     end
-    puts "Updated #{look.length} looks"
+    puts "Updated #{looks.length} looks"
   end
 
   def self.offer_type?(price_atm, price_buy)
