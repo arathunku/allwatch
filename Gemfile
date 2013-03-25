@@ -25,14 +25,15 @@ end
 group :development, :test do
   gem "rspec-rails", "~> 2.0"
   gem "guard-rspec", "2.4.0"
-  gem 'guard-spork', '1.2.0'
+  gem 'guard-spork', github: 'guard/guard-spork'
   gem 'spork', '0.9.2'
   gem 'debugger'
   gem "pg", "0.14.1"
+  gem 'rb-inotify', '~> 0.9'
+  gem "capybara", "2.0.2"
 end
 
 group :test do
-  gem "capybara", "2.0.2"
   gem 'factory_girl_rails', '4.2.1'
 
 end

@@ -21,7 +21,10 @@ class LooksController < ApplicationController
       
     else
       #prepare - method in model
-      @look = Look.prepare(current_user, params)
+      look_query = Look.prepare(params)
+      @look = current_user.looks.new(name_query: params["look_for"][:search_string],
+                                     look_query: look_query,
+                                     offer_type: params["offer_type"].to_i)
       if @look.save
         flash[:success] = "Aukcja dodana, za chwilę powinien przyjść e-mail."
         Allegro.check_for_new_auctions(@look.id) if Rails.env.production?

@@ -15,8 +15,7 @@ require 'spec_helper'
 
 describe Look do
   let(:user) { FactoryGirl.create(:user) }
-  before {@look = user.looks.new(name_query: "garmin",
-                                 look_query: "{items to find form}")}
+  before {@look = FactoryGirl.create(:look, user: user)}
   subject { @look }
 
   it { should respond_to(:user_id) }
@@ -29,24 +28,22 @@ describe Look do
     before { @look.user_id = nil }
     it { should_not be_valid }
   end
-
-  describe "accessible attributes" do
-    it "should not allow access to user_id" do
-      expect do
-        Look.new(user_id: user.id)
-      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
-    end    
+  describe "when name_query is not present" do
+    before { @look.name_query = nil }
+    it { should_not be_valid }
+  end
+  describe "when offer type is not within range" do
+    before { @look.offer_type = 5}
+    it {should_not be_valid}
+  end
+  describe "when offer type is within range" do
+    before { @look.offer_type = 2}
+    it {should be_valid}
   end
   describe "look associations" do
     before { user.save }
-    let!(:older_micropost) do 
-      FactoryGirl.create(:look, user: user, updated_at: 1.day.ago)
-    end
-    let!(:newer_micropost) do
-      FactoryGirl.create(:look, user: user, updated_at: 1.hour.ago)
-    end
 
-    it "should destroy associated microposts" do
+    it "should destroy associated looks" do
       looks = user.looks.dup
       user.destroy
       looks.should_not be_empty
@@ -54,7 +51,31 @@ describe Look do
         Look.find_by_id(look.id).should be_nil
       end
     end
-
   end
 
+  describe "saving new record" do
+    before do
+      @params = {"look_for"=>{"search_string"=>"ABCDEF"}, "offer_type"=>"0"}
+      user.save
+      @user = user
+    end
+    
+    describe "with proper values" do
+      let!(:look_query) {Look.prepare(@params) }
+      it "should create new record properly" do
+        #debugger
+        Look.create!(name_query: @params["look_for"]["search_string"],
+                           look_query: look_query,
+                           offer_type: @params["offer_type"].to_i,
+                           user_id: @user.id)
+      end
+    end
+
+    describe "prepare method working properly" do
+      it { @params.keys.should include("offer_type") }
+      it { @params.keys.should include("look_for") }
+      it { Look.prepare(@params).should be_a(String) }
+    end
+    
+  end
 end

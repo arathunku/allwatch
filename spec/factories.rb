@@ -7,8 +7,8 @@ FactoryGirl.define do
 
   factory :look do
     name_query "garmin"
-    look_query {'"search-string" => "garmin premium",
-                       "search-limit" => 10'}
+    look_query "{'search_string'=>'abc'}"
+    offer_type 0
     user
   end
 
