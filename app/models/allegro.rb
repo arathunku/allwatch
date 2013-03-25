@@ -54,8 +54,8 @@ class Allegro
         Notifier.notification(user, l, body).deliver
         body.each { |b| b.touch }
       end
-      puts "Done: #{l.name_query} -- #{body.length}"
     end
+    puts "Updated #{look.length} looks"
   end
 
   def self.offer_type?(price_atm, price_buy)
