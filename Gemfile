@@ -12,7 +12,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'whenever', :require => false
 #ALLEGRO
-gem "savon", "~> 2.1.0"
+gem "savon", "2.1.0"
 gem "httpclient", "~> 2.3.2"
 #-------------------
 
@@ -24,20 +24,19 @@ end
 
 group :development, :test do
   #gem 'sqlite3'
-  gem "rspec-rails", "2.12.2"
-  gem "guard-rspec", "2.4.0"
-  #windows gem "wdm", "~> 0.1.0"
-  gem 'guard-spork', '1.2.0'
-  gem 'spork', '0.9.2'
+  gem 'rspec-rails'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'spork'
+  gem 'spork-rails', git: 'git://github.com/koriroys/spork-rails.git'
   gem 'debugger'
   gem "pg", "0.14.1"
 end
 
 group :test do
   gem "capybara", "2.0.2"
-  #gem 'win32console', '1.3.0'
-  gem 'rb-fchange', '0.0.5'
-  gem 'rb-notifu', '0.0.4'
+  gem 'rb-inotify', '~> 0.9'
   gem 'factory_girl_rails', '4.2.0'
 
 end
