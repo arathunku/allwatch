@@ -29,7 +29,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'spork'
-  gem 'spork-rails', git: 'git://github.com/koriroys/spork-rails.git'
+  gem 'spork-rails'
   gem 'debugger'
   gem "pg", "0.14.1"
 end
