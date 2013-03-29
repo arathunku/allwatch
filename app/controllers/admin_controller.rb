@@ -11,11 +11,12 @@ class AdminController < ApplicationController
   end
 
   def destroy
-    if current_user.email == ENV['ADMIN_EMAIL']
+    user = User.find(params[:id])
+    if user.email == ENV['ADMIN_EMAIL']
       flash[:warning] = "Nie możesz usunąć siebie."
       redirect_to admin_index_path and return
     end
-    User.find(params[:id]).destroy
+    user.destroy
     flash[:success] = "Konto zostało usunięte."
     redirect_to admin_index_path
   end

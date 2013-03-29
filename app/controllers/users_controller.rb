@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    debugger
     if @user.save
       sign_in @user
       flash[:success] = "Hej! Zacznij coś obserwować, a po chwili dostaniesz email z aukcjami! Na początku zostanie wysłane maksymalnie 100 aukcji, a w kolejnych mailach tylko nowe."

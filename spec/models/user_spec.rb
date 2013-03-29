@@ -13,99 +13,60 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(email: "example@exa.com", 
-                            password: "abcd12",
-                            password_confirmation: "abcd12")}
-
-  subject { @user }
-
-  it { should respond_to(:email) }
-  it { should respond_to(:looks) }
-  it { should respond_to(:password_digest) }
-  it { should respond_to(:password) }
-  it { should respond_to(:password_confirmation) }
-  it { should respond_to(:remember_token) }
-  it { should respond_to(:authenticate) }
-  it { should be_valid }
-
-  describe "remember token" do
-    before { @user.save }
-    its(:remember_token) { should_not be_blank }
-  end
-
-  describe "email not present " do
-    before { @user.email = "" }
-    it { should_not be_valid }
-  end
-
-  describe "email too long" do
-    before { @user.email = "a"*129}
-    it { should_not be_valid}
-  end
-  describe "when email format is invalid" do
-    it "should be invalid" do
-      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
-                     foo@bar_baz.com foo@bar+baz.com]
-      addresses.each do |invalid_address|
-        @user.email = invalid_address
-        @user.should_not be_valid
-      end      
-    end
-  end
-
-  describe "when email format is valid" do
+  describe "FactoryGirl" do
     it "should be valid" do
-      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
-      addresses.each do |valid_address|
-        @user.email = valid_address
-        @user.should be_valid
-      end      
+      FactoryGirl.create(:user).should be_valid
+      FactoryGirl.build(:user, email: "example2@example.com").should be_valid
     end
   end
 
-  describe "when email address is already taken" do
+  it "should ACCEPT variations of email adresses" do
+    adresses = %w[abcd@examp.ecom AbXd@example.com.pl ak+2@ek.pl ak.2@ek.pl]
+    adresses.each do |adress|
+      FactoryGirl.build(:user, email: adress).should be_valid
+    end
+  end
+
+  it "should REJECT variations of email adresses" do
+    adresses = %w[abcdexamp.ecom AbXd@example.com,pl ak.2@ek]
+    adresses.each do |adress|
+      FactoryGirl.build(:user, email: adress).should_not be_valid
+    end
+  end
+
+  it "should REJECT duplicate email adress" do
+    FactoryGirl.create(:user).should be_valid
+    FactoryGirl.build(:user).should_not be_valid
+  end
+
+  describe "passwords" do
     before do
-      user_with_same_email = @user.dup
-      user_with_same_email.email = @user.email.upcase
-      user_with_same_email.save
+      @user = User.new(email: "user@example.com", 
+                     password: "foobar", password_confirmation: "foobar")
+    end
+    subject { @user }
+
+    it { should be_valid }
+
+    describe "when password is not present" do
+      before { @user.password = @user.password_confirmation = " " }
+      it { should_not be_valid }
     end
 
-    it { should_not be_valid }
-  end
-  
-  describe "when password is not present" do
-    before { @user.password = @user.password_confirmation = " " }
-    it { should_not be_valid }
-  end
-  
-  describe "when password doesn't match confirmation" do
-    before { @user.password_confirmation = "mismatch" }
-    it { should_not be_valid }
-  end
-
-  describe "when password confirmation is nil" do
-    before { @user.password_confirmation = nil }
-    it { should_not be_valid }
-  end
-
-  describe "with a password that's too short" do
-    before { @user.password = @user.password_confirmation = "a" * 5 }
-    it { should be_invalid }
-  end
-
-  describe "return value of authenticate method" do
-    before { @user.save }
-    let(:found_user) { User.find_by_email(@user.email) }
-
-    describe "with valid password" do
-      it { should == found_user.authenticate(@user.password) }
+    describe "when password doesn't match confirmation" do
+      before { @user.password_confirmation = "mismatch" }
+      it { should_not be_valid }
     end
 
-    describe "with invalid password" do
-      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-
-      it { should_not == user_for_invalid_password }
-      specify { user_for_invalid_password.should be_false }
+    describe "when password confirmation is nil" do
+      before { @user.password_confirmation = nil }
+      it { should_not be_valid }
     end
+
+    describe "when password is too short" do
+      before { @user.password_confirmation = @user.password = "a"*5 }
+      it { should_not be_valid }
+    end
+
   end
 end

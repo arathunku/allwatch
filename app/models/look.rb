@@ -25,12 +25,13 @@ class Look < ActiveRecord::Base
   validates :offer_type, inclusion: { in: 0..3 }
   default_scope order: "looks.updated_at DESC"
   
-  def self.prepare(current_user, params)
+  #The method goal is to return a proper look.
+  #Method is a good place if you would like to add additional settings
+  #avalible trough AllegroAPI which are not meant for a user to select now
+  def self.prepare(params)
     ActiveRecord::Base.include_root_in_json = false
-    params[:look_for][:search_order] = "1"
-    params[:look_for][:search_order_type] = "0"
-    current_user.looks.new(name_query: params[:look_for][:search_string],
-                           look_query: ActiveSupport::JSON.encode(params[:look_for]),
-                           offer_type: params[:offer_type].to_i)
+    params["look_for"][:search_order] = "1"
+    params["look_for"][:search_order_type] = "0"
+    ActiveSupport::JSON.encode(params[:look_for])
   end
 end
