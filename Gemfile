@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.11'
 gem "bootstrap-sass", "~> 2.2.2.0"
 gem "bcrypt-ruby", "~> 3.0.1"
 gem 'faker', '1.0.1'
@@ -10,9 +10,9 @@ gem 'rails-i18n'
 gem 'client_side_validations'
 gem 'execjs'
 gem 'therubyracer'
-
+gem 'whenever', :require => false
 #ALLEGRO
-gem "savon", "~> 2.1.0"
+gem "savon", "2.1.0"
 gem "httpclient", "~> 2.3.2"
 #-------------------
 
@@ -23,18 +23,21 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec-rails", "~> 2.0"
-  gem "guard-rspec", "2.4.0"
-  gem 'guard-spork', github: 'guard/guard-spork'
-  gem 'spork', '0.9.2'
+  #gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'spork'
+  gem 'spork-rails', git: 'git://github.com/koriroys/spork-rails.git'
   gem 'debugger'
   gem "pg", "0.14.1"
-  gem 'rb-inotify', '~> 0.9'
-  gem "capybara", "2.0.2"
 end
 
 group :test do
-  gem 'factory_girl_rails', '4.2.1'
+  gem "capybara", "2.0.2"
+  gem 'rb-inotify', '~> 0.9'
+  gem 'factory_girl_rails', '4.2.0'
 
 end
 
